@@ -11,8 +11,8 @@ function App() {
           { !isAuthenticated() && <button onClick = {() => login()}>login</button> }
         </div>
         <Switch>
-          <Route path="/login" render={() => login()} />
-          <Route path="/login/callback" render={() => handleAuthentication()} />
+          <Route exact path="/login" render={() => login()} />
+          <Route exact path="/login/callback" render={() => handleAuthentication()} />
         </Switch>
       </Router>
       
