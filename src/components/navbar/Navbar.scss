@@ -1,0 +1,15 @@
+@import '../../super.scss';
+
+.nbar{
+    background-color: $navbar-color;
+    height: 10vh;
+    color: white;
+    .logo{
+        height: 40px;
+    }
+    .prof-img{
+        border-radius: 50%;
+        height: 40px;
+        width: 40px;
+    }
+}
