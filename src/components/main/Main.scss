@@ -1,0 +1,76 @@
+#main{
+    height: 90vh;
+    width: 100%;
+    background-image: url('../../assets/images/with\ florr.jpg');
+    background-size: 100% 100%;
+    .toggle{
+        position: absolute;
+        right: 0%;
+        font-size: 30px;
+    }
+    .contain{
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 33.33%);
+        #wall{
+            grid-column: 1/2;
+            height: 90vh;
+            .graf{
+                position: relative;
+                top:20%;
+                left: 10%;
+                width: 100%;
+                height: 50%;
+                .graf-clue{
+                    width: auto;
+                    max-height: 100%;
+                    object-fit: contain;
+                }
+            }
+        }
+        #door{
+            grid-column: 2/3;
+            height: 90vh;
+            .d-img{
+                background-image: url('../../assets/images/door.png');
+                background-size: 100% 100%;
+                position: relative;
+                top:17.5%;
+                left: 18.3%;
+                width: 50.5%;
+                height: 60%;
+                .d-lock{
+                    background-image: url('../../assets//images/lock.png');
+                    background-size: 100% 100%;
+                    position: relative;
+                    top: 40%;
+                    left: 65%;
+                    height: 13%;
+                    width: 20%;
+                }
+            }
+        }
+        #photo{
+            grid-column: 3/4;
+            height: 90vh;
+            .p-img{
+                background-image: url('../../assets/images/photo.png');
+                background-size: 100% 100%;
+                position: relative;
+                top:30%;
+                left: 10%;
+                width: 27%;
+                height: 23%;
+                .clue{
+                    background-image: url('../../assets/images/my0.png');
+                    background-size: 100% 100%;
+                    position: relative;
+                    top: 7%;
+                    left: 9%;
+                    height: 86%;
+                    width: 81.9%;
+                }
+            }
+        }
+    }
+}
