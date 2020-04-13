@@ -1,5 +1,5 @@
 #photo-model{
-    background-image: url('../../../assets/images/photo.png');
+    background-image: url('../../assets/images/photo.png');
     background-size: 100% 100%;
     position: fixed;
     left: 50%;
@@ -10,13 +10,13 @@
     height: 70%;
     .close{
         color: black;
-        font-size: 50px;
+        font-size: 7vh;
         position: relative;
         top : 2%;
         right: -15%;
     }
     .clue{
-        background-image: url('../../../assets/images/my0.png');
+        background-image: url('../../assets/images/my0.png');
         background-size: 100% 100%;
         position: absolute;
         top: 7%;

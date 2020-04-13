@@ -1,0 +1,37 @@
+@import '../../super.scss';
+
+#chat-area{
+    width: 22%;
+    height: 90vh;
+    background-color: $doorinfo-color;
+    position: absolute;
+    left: 0px;
+    z-index: 100;
+    animation: chat 0.5s 1;
+    .toggle-3{
+        position: fixed;
+        font-size: 5vh;
+        color: white;
+        top: 50%;
+        animation: but-2 0.5s 1;
+        left: 20.5%;
+    }   
+}
+
+@keyframes chat {
+    0% {
+      left : -22%;
+    }
+    100% {
+      left : 0%;
+    }
+}
+
+@keyframes but-2 {
+    0%{
+        left: 0%;
+    }
+    100%{
+        left: 20.5%;
+    }
+}

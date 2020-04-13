@@ -1,18 +1,21 @@
 @import '../../super.scss';
 
 #door-board{
-    width: 300px;
+    width: 22%;
     height: 90vh;
     background-color: $doorinfo-color;
     position: absolute;
     right: 0px;
     overflow-y: scroll;
     z-index: 100;
-    .toggle{
-        position: absolute;
-        font-size: 30px;
+    animation: door 0.5s 1;
+    .toggle-2{
+        position: fixed;
+        font-size: 5vh;
         color: white;
-        left: 0%;
+        right: 20.5%;
+        animation: but-1 0.5s 1;
+        top: 50%;
     }
     .door-info{
         width: 100%;
@@ -22,22 +25,29 @@
         align-items: center;
         font-size: 18px;
         .door{
-            font-size: 45px;
+            font-size: 7vh;
             color: #f09595;
         }
         .info{
             .door-name{
+                font-size: 3vh;
                 color: #f09595;
+                margin-bottom: 1vh;
+                animation: text 0.5s 1;
             }
             .points{
+                font-size: 3vh;
                 color: #6d71c9;
                 margin-bottom: 0px;
+                animation: text 0.5s 1;
             }
         }
-        .winner-img{
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+        .img-cont{
+            width: 25%;
+            .winner-img{
+                height: 8vh;
+                border-radius: 50%;
+            }
         }
     }
 }
@@ -53,4 +63,33 @@
     background-color: darkgrey;
     outline: 1px solid slategrey;
     border-radius: 50%;
+}
+
+@keyframes door {
+    0% {
+      width: 0%;
+    }
+    100% {
+      width: 22%;
+    }
+}
+
+@keyframes but-1 {
+    0%{
+        right: 0%;
+    }
+    100%{
+        right: 20.5%;
+    }
+}
+
+@keyframes text {
+    0%{
+        font-size: 0vh;
+        opacity: 0;
+    }
+    100%{
+        font-size: 3vh;
+        opacity: 1s;
+    }
 }

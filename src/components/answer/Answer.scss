@@ -1,0 +1,47 @@
+#answer-model{
+    background-image: url(../../assets/images/lock.png);
+    background-size: 100% 100%;
+    position: fixed;
+    left: 50%;
+    margin-left: -17.5%;
+    top : 15%;
+    z-index: 50;
+    width: 35%;
+    height: 70%;
+    .close{
+        color: black;
+        font-size: 7vh;
+        position: relative;
+        top : 2%;
+        right: -12%;
+    }
+    .t-box{
+        background-color: transparent;
+        text-align: center;
+        font-size: 5vh;
+        position: absolute;
+        top: 13%;
+        left: 13.5%;
+        height: 12.5%;
+        width: 72.5%;
+        border-radius: 5px;
+    }
+    .sub{
+        background-color: transparent;
+        border: solid 1px #f59455;
+        position: absolute;
+        top: 61.8%;
+        left: 81.5%;
+        height: 22.2%;
+        width: 5.5%;
+        border-radius: 5px;
+    }
+    .sub:focus{
+        border: none;
+        outline: none;
+    }
+    .t-box:focus{
+        border: none;
+        outline: none;
+    }
+}

@@ -10,7 +10,9 @@ function Doorinfo(props) {
                 <p className="door-name">Door {props.door}</p>
                 <p className="points">{props.point} PTS</p>
             </div>
-            <img src={require('../profile.png')} className="winner-img" alt="" />
+            <div className="img-cont">
+                {props.isOpen && <img src={require('../../../assets/images/profile.png')} className="winner-img" alt="" />}
+            </div>
         </div>
     );
 }
