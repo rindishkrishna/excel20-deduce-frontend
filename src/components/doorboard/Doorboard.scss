@@ -1,21 +1,24 @@
 @import '../../super.scss';
 
 #door-board{
-    width: 22%;
     height: 90vh;
     background-color: $doorinfo-color;
     position: absolute;
     right: 0px;
     overflow-y: scroll;
     z-index: 100;
-    animation: door 0.5s 1;
+    transition: all 0.5s;
+    overflow-x: hidden;
     .toggle-2{
         position: fixed;
         font-size: 5vh;
         color: white;
-        right: 20.5%;
-        animation: but-1 0.5s 1;
+        right: -1.5%;
+        transition: all 0.5s;
         top: 50%;
+    }
+    .togg-tra{
+        right: 20.5%;
     }
     .door-info{
         width: 100%;
@@ -30,16 +33,21 @@
         }
         .info{
             .door-name{
-                font-size: 3vh;
                 color: #f09595;
                 margin-bottom: 1vh;
                 animation: text 0.5s 1;
             }
             .points{
-                font-size: 3vh;
                 color: #6d71c9;
                 margin-bottom: 0px;
                 animation: text 0.5s 1;
+            }
+            .tex{
+                font-size: 0vh;
+                transition: all 0.5s;
+            }
+            .tex-tra{
+                font-size: 3vh;
             }
         }
         .img-cont{
@@ -51,6 +59,13 @@
         }
     }
 }
+.bor{
+    width: 0%;
+}
+.bor-tra{
+    width: 22%;
+}
+
 #door-board::-webkit-scrollbar {
     width: 2px;
 }
@@ -63,33 +78,4 @@
     background-color: darkgrey;
     outline: 1px solid slategrey;
     border-radius: 50%;
-}
-
-@keyframes door {
-    0% {
-      width: 0%;
-    }
-    100% {
-      width: 22%;
-    }
-}
-
-@keyframes but-1 {
-    0%{
-        right: 0%;
-    }
-    100%{
-        right: 20.5%;
-    }
-}
-
-@keyframes text {
-    0%{
-        font-size: 0vh;
-        opacity: 0;
-    }
-    100%{
-        font-size: 3vh;
-        opacity: 1s;
-    }
 }

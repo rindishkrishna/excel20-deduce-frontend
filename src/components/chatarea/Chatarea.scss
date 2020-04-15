@@ -5,33 +5,23 @@
     height: 90vh;
     background-color: $doorinfo-color;
     position: absolute;
-    left: 0px;
+    transition: all 0.5s;
     z-index: 100;
-    animation: chat 0.5s 1;
     .toggle-3{
         position: fixed;
         font-size: 5vh;
         color: white;
         top: 50%;
-        animation: but-2 0.5s 1;
+        transition: all 0.5s;
+        left: -1.5%;
+    }
+    .togg-tra {
         left: 20.5%;
-    }   
+    }  
 }
-
-@keyframes chat {
-    0% {
-      left : -22%;
-    }
-    100% {
-      left : 0%;
-    }
+.cha{
+    left: -22%;
 }
-
-@keyframes but-2 {
-    0%{
-        left: 0%;
-    }
-    100%{
-        left: 20.5%;
-    }
+.cha-tra{
+    left: 0%;
 }

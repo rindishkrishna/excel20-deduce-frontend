@@ -39,8 +39,8 @@ function Main() {
             <FontAwesomeIcon onClick = {() => chat()} className="toggle-chat" 
             icon = {faCommentDots} />
 
-            {isChat && <Chatarea toggle = {chat} />}
-            {isBoard && <Doorboard toggle = {board} />}
+            <Chatarea toggle = {chat} cha={isChat} />
+            <Doorboard toggle = {board} bor={isBoard} />
             {isPhoto && <Photo toggle = {photo} />}
             {isAnswer && <Answer toggle = {answer} />}
 

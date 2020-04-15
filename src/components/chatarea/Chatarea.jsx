@@ -5,8 +5,8 @@ import {faAngleLeft} from '@fortawesome/free-solid-svg-icons';
 
 function Chatarea(props) {
     return(
-        <div id="chat-area">
-            <FontAwesomeIcon onClick={() => props.toggle()} className='toggle-3' 
+        <div id="chat-area" className={`cha ${props.cha ? "cha-tra" : " "}`}>
+            <FontAwesomeIcon onClick={() => props.toggle()} className={`toggle-3 ${props.cha ? "togg-tra" : " "}`} 
             icon = {faAngleLeft} />
             <h1 className="text-center text-white">chat</h1>
         </div>
