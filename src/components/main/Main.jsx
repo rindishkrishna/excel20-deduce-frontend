@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faArrowCircleLeft} from '@fortawesome/free-solid-svg-icons';
+import {faAngleLeft, faCommentDots} from '@fortawesome/free-solid-svg-icons';
 import Doorboard from '../doorboard/Doorboard';
-import Photo from './photo/Photo';
-import Answer from './answer/Answer';
+import Chatarea from '../chatarea/Chatarea';
+import Photo from '../photo/Photo';
+import Answer from '../answer/Answer';
 import './Main.scss';
 
 function Main() {
@@ -11,6 +12,9 @@ function Main() {
     const [isBoard, setBoard] = useState(false);
     const [isPhoto, setPhoto] = useState(false);
     const [isAnswer, setAnswer] = useState(false);
+    const [isChat, setChat] = useState(false);
+    const [anime, setAnime] = useState(false);
+
     const photo = () => {
         if(!isAnswer){
             setPhoto(!isPhoto);
@@ -24,17 +28,31 @@ function Main() {
     const board = () => {
         setBoard(!isBoard);
     }
+    const chat = () => {
+        setChat(!isChat);
+    }
 
     return(
         <div id = "main">
-            <FontAwesomeIcon onClick = {() => board()} className="toggle" icon = {faArrowCircleLeft} />
-            {isBoard && <Doorboard toggle = {board} />}
+            <FontAwesomeIcon onClick = {() => board()} className="toggle" 
+            icon = {faAngleLeft} />
+            <FontAwesomeIcon onClick = {() => chat()} className="toggle-chat" 
+            icon = {faCommentDots} />
+
+            <Chatarea toggle = {chat} cha={isChat} />
+            <Doorboard toggle = {board} bor={isBoard} />
             {isPhoto && <Photo toggle = {photo} />}
             {isAnswer && <Answer toggle = {answer} />}
+
+            <img src={require('../../assets/images/mascot.png')} alt="" id="mascot" 
+            className={anime ? "mascot" : ""} onClick={() => setAnime(true)} 
+            onAnimationEnd={() => setAnime(false)} />
+            
             <div className="contain">
                 <div id="wall">
-                    <div className="graf">
-                        <img className="graf-clue img-fluid mx-auto d-block" src={require('../../assets/images/logo.png')} alt="" />
+                    <div className="graf d-flex justify-content-center">
+                        <img className="graf-clue img-fluid mx-auto d-block" 
+                        src={require('../../assets/images/logo.png')} alt="" />
                     </div>
                 </div>
                 <div id="door">

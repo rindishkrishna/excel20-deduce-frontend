@@ -1,0 +1,27 @@
+@import '../../super.scss';
+
+#chat-area{
+    width: 22%;
+    height: 90vh;
+    background-color: $doorinfo-color;
+    position: absolute;
+    transition: all 0.5s;
+    z-index: 100;
+    .toggle-3{
+        position: fixed;
+        font-size: 5vh;
+        color: white;
+        top: 50%;
+        transition: all 0.5s;
+        left: -1.5%;
+    }
+    .togg-tra {
+        left: 20.5%;
+    }  
+}
+.cha{
+    left: -22%;
+}
+.cha-tra{
+    left: 0%;
+}

@@ -1,18 +1,24 @@
 @import '../../super.scss';
 
 #door-board{
-    width: 300px;
     height: 90vh;
     background-color: $doorinfo-color;
     position: absolute;
     right: 0px;
     overflow-y: scroll;
     z-index: 100;
-    .toggle{
-        position: absolute;
-        font-size: 30px;
+    transition: all 0.5s;
+    overflow-x: hidden;
+    .toggle-2{
+        position: fixed;
+        font-size: 5vh;
         color: white;
-        left: 0%;
+        right: -1.5%;
+        transition: all 0.5s;
+        top: 50%;
+    }
+    .togg-tra{
+        right: 20.5%;
     }
     .door-info{
         width: 100%;
@@ -22,25 +28,44 @@
         align-items: center;
         font-size: 18px;
         .door{
-            font-size: 45px;
+            font-size: 7vh;
             color: #f09595;
         }
         .info{
             .door-name{
                 color: #f09595;
+                margin-bottom: 1vh;
+                animation: text 0.5s 1;
             }
             .points{
                 color: #6d71c9;
                 margin-bottom: 0px;
+                animation: text 0.5s 1;
+            }
+            .tex{
+                font-size: 0vh;
+                transition: all 0.5s;
+            }
+            .tex-tra{
+                font-size: 3vh;
             }
         }
-        .winner-img{
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+        .img-cont{
+            width: 25%;
+            .winner-img{
+                height: 8vh;
+                border-radius: 50%;
+            }
         }
     }
 }
+.bor{
+    width: 0%;
+}
+.bor-tra{
+    width: 22%;
+}
+
 #door-board::-webkit-scrollbar {
     width: 2px;
 }

@@ -4,12 +4,22 @@
     background-color: $navbar-color;
     height: 10vh;
     color: white;
+    .score{
+        margin-right: 3vw;
+    }
+    .name{
+        margin-right: 2vw;
+    }
+    .tex{
+        font-size: 3vh;
+        font-weight: bold;
+        margin-top: 1vh;
+    }
     .logo{
-        height: 40px;
+        height: 5vh;
     }
     .prof-img{
         border-radius: 50%;
-        height: 40px;
-        width: 40px;
+        height: 6vh;
     }
 }
