@@ -14,7 +14,7 @@ function Answer(props) {
                   "q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
                   "a", "s", "d", "f", "g", "h", "j", "k", "l",
                   "z", "x", "c", "v", "b", "n", "m"].map((x) => {
-                      return(<button className="butt" onClick={() => setText(text + x)}>{x}</button>)
+                      return(<button className="butt" onClick={() => setText(text + x)} key={x}>{x}</button>)
                   })
 
     return(
