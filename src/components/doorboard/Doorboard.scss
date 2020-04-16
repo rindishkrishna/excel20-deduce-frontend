@@ -28,12 +28,12 @@
         align-items: center;
         font-size: 18px;
         .door{
-            font-size: 7vh;
-            color: #f09595;
+            font-size: 6vh;
+            //color: #f09595;
         }
         .info{
             .door-name{
-                color: #f09595;
+                //color: #f09595;
                 margin-bottom: 1vh;
                 animation: text 0.5s 1;
             }
@@ -78,4 +78,32 @@
     background-color: darkgrey;
     outline: 1px solid slategrey;
     border-radius: 50%;
+}
+
+.color-purple{
+    color: #A57BAF;
+}
+
+.door-info::before{
+    position: absolute;
+    content: '';
+    height: 18%;
+    width:1%;
+    background-color: #6d71c9;
+    transition: 10ms;
+}
+
+.door-info:hover::before{
+    transition: 10ms;
+    z-index: -1;
+    position: absolute;
+    content: '';
+    height: 18%;
+    width:35%;
+    background-color: rgba(0,0,0,0);
+    background-image: linear-gradient(to right,rgba(109,113,201,0.85), rgba(109,113,201,0),rgba(109,113,201,0));
+}
+
+.door-info:hover{
+    color:#E2BCEB;
 }
