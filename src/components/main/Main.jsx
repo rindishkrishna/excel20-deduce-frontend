@@ -10,27 +10,22 @@ import Imagebox from "./Imagebox/Imagebox";
 import { get } from "../../auth0/http";
 import { API_ROOT } from "../../auth0/api_config";
 import "./Main.scss";
-import { login } from "../../auth0/auth0";
 
 function Main() {
   const [level, setLevel] = useState({
-    level_number: 1,
-    level_file_1:
-      "https://i.pinimg.com/originals/d7/59/9a/d7599abc9531c7f66995176121f23a8d.jpg",
-    level_file_2:
-      "https://i.pinimg.com/originals/37/79/aa/3779aa27032f591ae1fca049f8e2d462.jpg",
-    level_file_3:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTH9H_HfHTCzbVenSwrQ3d6U4vZbVNASiOTVPsMIh2KCOTXeRoT&usqp=CAU",
-    level_file_4:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSHQBAS9K-qg0f3lrHy64MRbQ5hj5ExBrxlVJORNVry4PDkqjRa&usqp=CAU",
+    level_number: null,
+    level_file_1: null,
+    level_file_2: null,
+    level_file_3: null,
+    level_file_4: null,
     cover_image: null,
-    question: "first question",
-    hints: [{ hint: "bitch please" }],
+    question: null,
+    hints: [],
   });
   const [isBoard, setBoard] = useState(false);
   const [isPhoto, setPhoto] = useState({
     state: false,
-    image: level.level_file_2,
+    image: "",
   });
   const [isNotice, setNotice] = useState(false);
   const [isAnswer, setAnswer] = useState(false);
@@ -61,9 +56,10 @@ function Main() {
   };
 
   useEffect(() => {
+    //Effect callbacks are synchronous to prevent race conditions
     (async () => {
         let res = await get(API_ROOT + "question");
-        setLevel(res)
+        setLevel(res);
     })();
   }, []);
 
