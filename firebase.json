@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "target": "deduce",
+    "site": "deduce",
     "public": "build",
     "ignore": [
       "firebase.json",
