@@ -5,16 +5,30 @@ import Navbar from './components/navbar/Navbar';
 import Main from './components/main/Main';
 import history from './utils/history';
 import Reload from './components/reload/Reload';
-import {login, handleAuthentication} from './auth0/auth0';
+import {login, handleAuthentication, getProfile} from './auth0/auth0';
 
 function App() {
 
   const [screen, setScreen] = useState(true);
+  const [user, setUser] = useState({
+    name : "",
+    image : ""
+  });
 
   useEffect(() => {
     if(window.innerWidth < window.innerHeight){
       setScreen(false);
     }
+    getProfile((err, user)=>{
+      if(err){
+        console.error(err);
+      }else{
+        setUser({
+          name : user.given_name,
+          image : user.picture
+        })
+      }
+    })
   }, []);
 
   return (
@@ -23,7 +37,7 @@ function App() {
         {
           screen ? 
           <React.Fragment>
-            <Navbar score={30} name={"Afnan"} />
+            <Navbar score={30} name={user.name} image={user.image} />
             <Main />
           </React.Fragment> :
           <Reload screen={setScreen} />

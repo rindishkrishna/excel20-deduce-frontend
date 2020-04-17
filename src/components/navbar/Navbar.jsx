@@ -11,7 +11,7 @@ function Navbar(props) {
                 <p className="score tex">MY SCORE : {props.score}</p>
                 <div className="d-flex">
                     <p className="name tex">{props.name}</p>
-                    <img src={require('../../assets/images/profile.png')} className="d-inline-block align-top prof-img" alt="" />
+                    <img src={props.image} className="d-inline-block align-top prof-img" alt="" />
                 </div>
             </div>
         </nav>

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faCommentDots } from "@fortawesome/free-solid-svg-icons";
@@ -9,43 +10,39 @@ import Imagebox from "./Imagebox/Imagebox";
 import { get } from "../../auth0/http";
 import { API_ROOT } from "../../auth0/api_config";
 import "./Main.scss";
-import { login } from "../../auth0/auth0";
 
 function Main() {
   const [level, setLevel] = useState({
-    level_number: 1,
-    level_file_1:
-      "https://i.pinimg.com/originals/d7/59/9a/d7599abc9531c7f66995176121f23a8d.jpg",
-    level_file_2:
-      "https://i.pinimg.com/originals/37/79/aa/3779aa27032f591ae1fca049f8e2d462.jpg",
-    level_file_3:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTH9H_HfHTCzbVenSwrQ3d6U4vZbVNASiOTVPsMIh2KCOTXeRoT&usqp=CAU",
-    level_file_4:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSHQBAS9K-qg0f3lrHy64MRbQ5hj5ExBrxlVJORNVry4PDkqjRa&usqp=CAU",
+    level_number: null,
+    level_file_1: null,
+    level_file_2: null,
+    level_file_3: null,
+    level_file_4: null,
     cover_image: null,
-    question: "first question",
-    hints: [{ hint: "bitch please" }],
+    question: null,
+    hints: [],
   });
   const [isBoard, setBoard] = useState(false);
   const [isPhoto, setPhoto] = useState({
     state: false,
-    image: level.level_file_2,
+    image: "",
   });
   const [isNotice, setNotice] = useState(false);
   const [isAnswer, setAnswer] = useState(false);
   const [isChat, setChat] = useState(false);
   const [anime, setAnime] = useState(false);
 
+
   const notice = () => {
-    if (!isAnswer && !isPhoto.state) {
-      setNotice(!isNotice);
+    if(!isAnswer && !isPhoto.state){
+        setNotice(!isNotice);
     }
-  };
-  const photo = (link) => {
-    if (!isAnswer && !isNotice) {
-      setPhoto({ image: link, state: !isPhoto.state });
+  }
+  const photo = (x, link) => {
+    if(!isAnswer && !isNotice){
+        setPhoto({image : link, state : x});
     }
-  };
+  }
   const answer = () => {
     if (!isPhoto.state && !isNotice) {
       setAnswer(!isAnswer);
@@ -58,37 +55,34 @@ function Main() {
     setChat(!isChat);
   };
 
-  useEffect(async () => {
-    let res = await get(API_ROOT + "question");
-    console.log(res);
+  useEffect(() => {
+    //Effect callbacks are synchronous to prevent race conditions
+    (async () => {
+        let res = await get(API_ROOT + "question");
+        setLevel(res);
+    })();
   }, []);
+
 
   return (
     <div id="main">
-      <FontAwesomeIcon
-        onClick={() => board()}
-        className="toggle"
-        icon={faAngleLeft}
-      />
-      <FontAwesomeIcon
-        onClick={() => chat()}
-        className="toggle-chat"
-        icon={faCommentDots}
-      />
+      <div className={`door-btn ${isBoard ? "toggle-chat" : ""}`} onClick = {() => board()}>
+        <FontAwesomeIcon icon = {faAngleLeft} />
+      </div>
+      <div className={`chat-btn ${isChat ? "toggle-chat" : ""}`} onClick = {() => chat()}>
+        <p>chat <FontAwesomeIcon icon = {faCommentDots} /></p>
+      </div> 
 
       <Chatarea toggle={chat} cha={isChat} />
       <Doorboard toggle={board} bor={isBoard} />
       {isPhoto.state && <Photo toggle={photo} link={isPhoto.image} />}
       {isAnswer && <Answer toggle={answer} />}
 
-      <img
-        src={require("../../assets/images/mascot.png")}
-        alt=""
-        id="mascot"
-        className={anime ? "mascot" : ""}
-        onClick={() => setAnime(true)}
-        onAnimationEnd={() => setAnime(false)}
-      />
+      <div>
+        <img src={require('../../assets/images/mascot.png')} alt="" id="mascot" 
+        className={anime ? "mascot" : ""} onClick={() => setAnime(true)} 
+        onAnimationEnd={() => setAnime(false)} />
+      </div>
 
       <div className="contain">
         <div id="wall">

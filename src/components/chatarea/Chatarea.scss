@@ -2,26 +2,25 @@
 
 #chat-area{
     width: 22%;
-    height: 90vh;
     background-color: $doorinfo-color;
     position: absolute;
     transition: all 0.5s;
     z-index: 100;
+    left: 0%;
+    bottom: 0%;
     .toggle-3{
-        position: fixed;
+        position: absolute;
         font-size: 5vh;
         color: white;
-        top: 50%;
-        transition: all 0.5s;
-        left: -1.5%;
+        top: 0%;
+        left: 90%;
     }
-    .togg-tra {
-        left: 20.5%;
-    }  
 }
 .cha{
-    left: -22%;
+    height: 0vh;
+    overflow: hidden;
 }
 .cha-tra{
-    left: 0%;
+    height: 90vh;
+    border-radius: 0px;
 }
