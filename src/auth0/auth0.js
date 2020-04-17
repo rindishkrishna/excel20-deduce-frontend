@@ -16,20 +16,8 @@ export const login = () => {
     webAuth.authorize();
 }
 
-export const isAuthenticated = () => {
-    let expiresAt = JSON.parse(localStorage.getItem('expires_at'));
-    return new Date().getTime() < expiresAt;
-}
-
-export const getIdToken = () => {
-    const idToken = localStorage.getItem('id_token');
-    if (!idToken) {
-        throw new Error('No ID Token found');
-    }
-    return idToken;
-}
 export const getAccessToken = () => {
-    const accessToken = localStorage.getItem('access_token');
+    const accessToken = localStorage.getItem('access_token_auth0');
     if (!accessToken) {
         throw new Error('No Access Token found');
     }
@@ -55,27 +43,18 @@ export const handleAuthentication = () => {
 };
 
 const setSession = async (authResult, redirect) => {
-    let res = await postWithoutAuth(API_ROOT + "login", { "access_token": authResult.accessToken })
+    // access_token_auth0 is auth0's token used to obtain user info from auth0.
+    // access_token is the JWT issued by the backend used for making requests to the backend.
+    localStorage.setItem("access_token_auth0", authResult.accessToken);
+    let res = await postWithoutAuth(API_ROOT + "login", { "access_token": authResult.accessToken });
     localStorage.setItem('access_token', res.access);
     localStorage.setItem('refresh_token', res.refresh);
     redirect('/');
 };
 
 export const logout = () => {
-    /*fetch(`${window.location.origin}/auth/v1/signout`, {
-        mode: 'cors',
-    })
-        .then(res => {
-        return res.json();
-        })
-        .then(data => {
-        if (data.Success) {*/
     localStorage.removeItem('access_token');
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('expires_at');
+    localStorage.removeItem('refresh_token');
+    localStorage.removeItem('access_token_auth0');
     history.push('/');
-    /* } else {
-            window.alert('Logout failed, check your network and try again');
-        }
-        });*/
 };
