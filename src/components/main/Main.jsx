@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faAngleLeft, faCommentDots} from '@fortawesome/free-solid-svg-icons';
 import Doorboard from '../doorboard/Doorboard';
@@ -19,7 +19,7 @@ function Main() {
         cover_image : null,
         question : "first question",
         hints : [
-            {hint : "bitch please"} 
+            {hint : "its a movie you fool"} 
         ]
     });
     const [isBoard, setBoard] = useState(false);
@@ -37,9 +37,9 @@ function Main() {
             setNotice(!isNotice);
         }
     }
-    const photo = (link) => {
+    const photo = (x, link) => {
         if(!isAnswer && !isNotice){
-            setPhoto({image : link, state : !isPhoto.state});
+            setPhoto({image : link, state : x});
         }
     }
     const answer = () => {
@@ -56,19 +56,24 @@ function Main() {
 
     return(
         <div id = "main">
-            <FontAwesomeIcon onClick = {() => board()} className="toggle" 
-            icon = {faAngleLeft} />
-            <FontAwesomeIcon onClick = {() => chat()} className="toggle-chat" 
-            icon = {faCommentDots} />
+            <div className={`door-btn ${isBoard ? "toggle-chat" : ""}`} onClick = {() => board()}>
+                <FontAwesomeIcon icon = {faAngleLeft} />
+            </div>
+            <div className={`chat-btn ${isChat ? "toggle-chat" : ""}`} onClick = {() => chat()}>
+                <p>chat <FontAwesomeIcon icon = {faCommentDots} /></p>
+            </div> 
 
             <Chatarea toggle = {chat} cha={isChat} />
-            <Doorboard toggle = {board} bor={isBoard} />
+            <Doorboard toggle = {board} bor={isBoard}  />
             {isPhoto.state && <Photo toggle = {photo} link={isPhoto.image} />}
             {isAnswer && <Answer toggle = {answer} />}
 
-            <img src={require('../../assets/images/mascot.png')} alt="" id="mascot" 
-            className={anime ? "mascot" : ""} onClick={() => setAnime(true)} 
-            onAnimationEnd={() => setAnime(false)} />
+            <div>
+                <img src={require('../../assets/images/mascot.png')} alt="" id="mascot" 
+                className={anime ? "mascot" : ""} onClick={() => setAnime(true)} 
+                onAnimationEnd={() => setAnime(false)} />
+            </div>
+            
             
             <div className="contain">
                 <div id="wall">

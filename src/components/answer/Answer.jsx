@@ -7,7 +7,12 @@ function Answer(props) {
 
     const [text, setText] = useState('');
     const click = () => {
-        alert(text);
+        if(text === "captainamericacivilwar"){
+            alert("correct");
+        }else{
+            alert("wrong");
+        }
+        
     }
 
     const list = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
