@@ -58,17 +58,9 @@ function Main() {
     setChat(!isChat);
   };
 
-  useEffect(() => {
-    // Get access and refresh tokens
-    let at = localStorage.getItem("access_token");
-    let rt = localStorage.getItem("refresh_token");
-    if (at == null || rt == null) {
-      // Login
-      login();
-    } else {
-      let q = get(API_ROOT + "question", { Authorization: `Bearer ${at}` });
-      console.log(q);
-    }
+  useEffect(async () => {
+    let res = await get(API_ROOT + "question");
+    console.log(res);
   }, []);
 
   return (

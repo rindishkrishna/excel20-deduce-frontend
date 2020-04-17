@@ -1,11 +1,12 @@
 import config from './auth_config.json';
 import auth0 from 'auth0-js';
-//import * as http from './http';
+import { postWithoutAuth } from './http';
 import history from '../utils/history';
+import { API_ROOT } from './api_config'
 
 const webAuth = new auth0.WebAuth({
-    clientID : config.clientID,
-    domain : config.domain,
+    clientID: config.clientID,
+    domain: config.domain,
     responseType: 'token id_token',
     redirectUri: `${window.location.origin}/login/callback`,
     scope: 'openid profile email'
@@ -43,31 +44,20 @@ export const getProfile = (callback) => {
 }
 
 export const handleAuthentication = () => {
-    webAuth.parseHash({ hash: window.location.hash }, function(err, authResult) {
-      if (err) {
-        return console.log(err);
-      }
-      setSession(authResult, loc => {
-        history.push(loc);
-      });
+    webAuth.parseHash({ hash: window.location.hash }, function (err, authResult) {
+        if (err) {
+            return console.log(err);
+        }
+        setSession(authResult, loc => {
+            history.push(loc);
+        });
     });
-  };
-  
+};
+
 const setSession = async (authResult, redirect) => {
-    const expiresAt = JSON.stringify(
-        authResult.expiresIn * 1000 + new Date().getTime(),
-    );
-    localStorage.setItem('access_token', authResult.accessToken);
-    console.log(authResult.accessToken);
-    localStorage.setItem('id_token', authResult.idToken);
-    localStorage.setItem('expires_at', expiresAt);
-    /*const body = new FormData();
-    body.append('access_token', authResult.accessToken);
-    const res = await http.post(`${window.location.origin}/auth/v1/signin`, body);
-    if (res.Error) {
-        alert('Login failed');
-        redirect('/login');
-    }*/
+    let res = await postWithoutAuth(API_ROOT + "login", { "access_token": authResult.accessToken })
+    localStorage.setItem('access_token', res.access);
+    localStorage.setItem('refresh_token', res.refresh);
     redirect('/');
 };
 

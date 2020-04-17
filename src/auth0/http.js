@@ -12,10 +12,13 @@ const checkAuth = () => {
     return at;
 }
 
-export const post = (url, data) => {
+export const postWithoutAuth = (url, data) => {
     return fetch(url, {
         method: 'POST',
-        body: data,
+        body: JSON.stringify(data),
+        headers: {
+            "Content-Type": "application/json"
+        }
     })
         .then(res => res.json())
         .catch(err => err);
@@ -33,3 +36,9 @@ export const get = url => {
             .catch(err => console.log(err));
     }
 };
+
+export const getWithoutAuth = url => {
+    return fetch(url)
+        .then(res => res.json())
+        .catch(err => console.log(err));
+}
