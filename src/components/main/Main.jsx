@@ -59,7 +59,24 @@ function Main() {
       let res = await get(`${API_ROOT}question`);
       console.log(res);
       setLevel(res);
+      localStorage.setItem("level_number", res.level_number);
     })();
+
+    // Check if someone unlocked the level this user is currently on every 60 seconds
+    let interval = setInterval(() => {
+      let currLevel = localStorage.getItem("level_number");
+      if (currLevel) {
+        (async () => {
+          let res = await get(`${API_ROOT}currlevel`);
+          if (res.level_number > currLevel) {
+            alert("Someone already solved this level!");
+            // Give some better visual feedback to user and reload page after a small delay to get new level
+          }
+        })();
+      }
+    }, 60000);
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
