@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faCommentDots } from "@fortawesome/free-solid-svg-icons";
@@ -32,17 +31,16 @@ function Main() {
   const [isChat, setChat] = useState(false);
   const [anime, setAnime] = useState(false);
 
-
   const notice = () => {
-    if(!isAnswer && !isPhoto.state){
-        setNotice(!isNotice);
+    if (!isAnswer && !isPhoto.state) {
+      setNotice(!isNotice);
     }
-  }
+  };
   const photo = (x, link) => {
-    if(!isAnswer && !isNotice){
-        setPhoto({image : link, state : x});
+    if (!isAnswer && !isNotice) {
+      setPhoto({ image: link, state: x });
     }
-  }
+  };
   const answer = () => {
     if (!isPhoto.state && !isNotice) {
       setAnswer(!isAnswer);
@@ -58,20 +56,45 @@ function Main() {
   useEffect(() => {
     //Effect callbacks are synchronous to prevent race conditions
     (async () => {
-        let res = await get(API_ROOT + "question");
-        setLevel(res);
+      let res = await get(`${API_ROOT}question`);
+      console.log(res);
+      setLevel(res);
+      localStorage.setItem("level_number", res.level_number);
     })();
-  }, []);
 
+    // Check if someone unlocked the level this user is currently on every 60 seconds
+    let interval = setInterval(() => {
+      let currLevel = localStorage.getItem("level_number");
+      if (currLevel) {
+        (async () => {
+          let res = await get(`${API_ROOT}currlevel`);
+          if (res.level_number > currLevel) {
+            alert("Someone already solved this level!");
+            // Give some better visual feedback to user and reload page after a small delay to get new level
+          }
+        })();
+      }
+    }, 60000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div id="main">
-      <div className={`door-btn ${isBoard ? "toggle-chat" : ""}`} onClick = {() => board()}>
-        <FontAwesomeIcon icon = {faAngleLeft} />
+      <div
+        className={`door-btn ${isBoard ? "toggle-chat" : ""}`}
+        onClick={() => board()}
+      >
+        <FontAwesomeIcon icon={faAngleLeft} />
       </div>
-      <div className={`chat-btn ${isChat ? "toggle-chat" : ""}`} onClick = {() => chat()}>
-        <p>chat <FontAwesomeIcon icon = {faCommentDots} /></p>
-      </div> 
+      <div
+        className={`chat-btn ${isChat ? "toggle-chat" : ""}`}
+        onClick={() => chat()}
+      >
+        <p>
+          chat <FontAwesomeIcon icon={faCommentDots} />
+        </p>
+      </div>
 
       <Chatarea toggle={chat} cha={isChat} />
       <Doorboard toggle={board} bor={isBoard} />
@@ -79,9 +102,14 @@ function Main() {
       {isAnswer && <Answer toggle={answer} />}
 
       <div>
-        <img src={require('../../assets/images/mascot.png')} alt="" id="mascot" 
-        className={anime ? "mascot" : ""} onClick={() => setAnime(true)} 
-        onAnimationEnd={() => setAnime(false)} />
+        <img
+          src={require("../../assets/images/mascot.png")}
+          alt=""
+          id="mascot"
+          className={anime ? "mascot" : ""}
+          onClick={() => setAnime(true)}
+          onAnimationEnd={() => setAnime(false)}
+        />
       </div>
 
       <div className="contain">
