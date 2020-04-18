@@ -2,13 +2,18 @@ import React from 'react';
 import './Chatarea.scss';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faAngleDown} from '@fortawesome/free-solid-svg-icons';
+import {faAngleLeft} from '@fortawesome/free-solid-svg-icons';
+import Chat from "../chat/src/App";
 
 function Chatarea(props) {
     return(
-        <div id="chat-area" className={`cha ${props.cha ? "cha-tra" : " "}`}>
-            <FontAwesomeIcon onClick={() => props.toggle()} className={`toggle-3 ${props.cha ? "togg-tra" : " "}`} 
+        <div id="chat-area" className={`cha d-flex  flex-column ${props.cha ? "cha-tra" : " "}`}>
+            <div>
+            <FontAwesomeIcon onClick={() => props.toggle()} className={`toggle-3 ${props.cha ? "togg-tra" : " "}`}
             icon = {faAngleDown} />
-            <h1 className="text-center text-white">chat</h1>
+            <h6 className="text-center grey-3 pt-2 pb-1">DISCUSSION BOARD</h6>
+            </div>
+            <Chat/>
         </div>
     );
 }

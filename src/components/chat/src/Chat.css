@@ -1,0 +1,207 @@
+div {
+  box-sizing: border-box !important;
+}
+
+.chatApp {
+  background-color: #212121;
+  flex-grow: 1;
+  overflow: auto;
+}
+
+.chat {
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.joinForm {
+}
+
+.joinForm input {
+  padding: 10px;
+  font-size: 15px;
+  margin: 10px;
+  width: 90%;
+}
+
+.joinForm button {
+  margin: 10px;
+  font-size: 15px;
+  padding: 10px;
+  width: 100%;
+  border: solid 1px black;
+  color: black;
+  background-color: white;
+}
+
+.chat-input input {
+  box-sizing: border-box;
+  padding: 2px 25px;
+  overflow-x: scroll;
+  border: solid 1px black;
+  border-radius: 50px;
+  font-size: 15px;
+  flex-shrink: 0;
+  width: 100%;
+  color: #dcdcdc;
+  background-color: #555;
+}
+
+.chat-input input::placeholder {
+  color: #bcbcbc;
+}
+
+.chat-input input:focus {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.chat-input {
+  width: 100%;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.messages {
+  flex-grow: 1;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  z-index: 0;
+  padding-bottom: 30px;
+}
+
+.message {
+  align-self: flex-start;
+  position: relative;
+  padding: 5px 10px;
+  background-color: #434343;
+  border-radius: 5px;
+  max-width: 80%;
+  min-width: 30%;
+  height: auto;
+  margin: 5px 20px;
+}
+
+.message::before {
+  z-index: -1;
+  content: "";
+  left: -5px;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 0.5em;
+  background-color: #434343;
+  color: #dedede;
+  transform: skew(40deg, 20deg);
+}
+
+.my-message {
+  background-color: #434343;
+  align-self: flex-end;
+  position: relative;
+  padding: 5px 10px;
+  border-radius: 5px;
+  max-width: 80%;
+  min-width: 30%;
+  margin: 5px 15px;
+}
+
+.my-message div {
+  text-align: right;
+  float: right;
+  padding-right: 5px;
+}
+
+.my-message::before {
+  z-index: -1;
+  content: "";
+  right: -4px;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 0.5em;
+  background-color: #434343;
+  color: #dedede;
+  transform: skew(-20deg, -40deg);
+}
+
+#sender {
+  color: #d32f2f;
+  font-weight: 500;
+  font-size: 0.9em;
+}
+
+.msg-text {
+  word-wrap: break-word;
+  width: 100%;
+  min-height: 2em;
+  font-size: 0.8em;
+  color: #bbb;
+  overflow: hidden;
+  height: auto;
+}
+
+#me {
+  color: green;
+}
+
+#scroll-icon {
+  color: #ababab;
+  height: 20px;
+  right: 25px;
+  bottom: 100px;
+  position: fixed;
+}
+
+#scrollbutton {
+  position: fixed;
+  right: 10px;
+  bottom: 50px;
+  border: none;
+  background-color: none;
+  color: grey;
+  font-size: 18px;
+}
+
+
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #333;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #767676;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.joinForm input{
+  background-color: #333333;
+  border: none;
+  color: #999;
+}
+
+.joinForm button{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  width: 70px;
+  background-color: #333333;
+  color: #999;
+}
