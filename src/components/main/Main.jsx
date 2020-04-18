@@ -10,7 +10,7 @@ import { get } from "../../auth0/http";
 import { API_ROOT } from "../../auth0/api_config";
 import "./Main.scss";
 
-function Main() {
+function Main(props) {
   const [level, setLevel] = useState({
     level_number: null,
     level_file_1: null,
@@ -96,7 +96,12 @@ function Main() {
         </p>
       </div>
 
-      <Chatarea toggle={chat} cha={isChat} />
+      <Chatarea
+        toggle={chat}
+        cha={isChat}
+        name={props.name}
+        email={props.email}
+      />
       <Doorboard toggle={board} bor={isBoard} />
       {isPhoto.state && <Photo toggle={photo} link={isPhoto.image} />}
       {isAnswer && <Answer toggle={answer} />}

@@ -1,21 +1,27 @@
-import React from 'react';
-import './Chatarea.scss';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faAngleDown} from '@fortawesome/free-solid-svg-icons';
-import {faAngleLeft} from '@fortawesome/free-solid-svg-icons';
+import React from "react";
+import "./Chatarea.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import Chat from "../chat/src/App";
 
 function Chatarea(props) {
-    return(
-        <div id="chat-area" className={`cha d-flex  flex-column ${props.cha ? "cha-tra" : " "}`}>
-            <div>
-            <FontAwesomeIcon onClick={() => props.toggle()} className={`toggle-3 ${props.cha ? "togg-tra" : " "}`}
-            icon = {faAngleDown} />
-            <h6 className="text-center grey-3 pt-2 pb-1">DISCUSSION BOARD</h6>
-            </div>
-            <Chat/>
-        </div>
-    );
+  return (
+    <div
+      id="chat-area"
+      className={`cha d-flex  flex-column ${props.cha ? "cha-tra" : " "}`}
+    >
+      <div>
+        <FontAwesomeIcon
+          onClick={() => props.toggle()}
+          className={`toggle-3 ${props.cha ? "togg-tra" : " "}`}
+          icon={faAngleDown}
+        />
+        <h6 className="text-center grey-3 pt-2 pb-1">DISCUSSION BOARD</h6>
+      </div>
+      <Chat name={props.name} email={props.email} />
+    </div>
+  );
 }
 
 export default Chatarea;
