@@ -4,7 +4,8 @@ const checkAuth = () => {
     // Get access and refresh tokens
     let at = localStorage.getItem("access_token");
     let rt = localStorage.getItem("refresh_token");
-    if (at == null || rt == null) {
+    let at_auth0 = localStorage.getItem("access_token_auth0")
+    if (!at || !rt || !at_auth0) {
         // Login
         login();
         return false;
@@ -24,9 +25,24 @@ export const postWithoutAuth = (url, data) => {
         .catch(err => err);
 };
 
+export const post = (url, data) => {
+    let at = checkAuth();
+    if (at) {
+        return fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${at}`
+            }
+        }).then(res => res.json())
+            .catch(err => err)
+    }
+}
+
 export const get = url => {
     let at = checkAuth();
-    if (at !== false) {
+    if (at) {
         return fetch(url, {
             headers: {
                 "Authorization": `Bearer ${at}`

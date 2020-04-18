@@ -1,1 +1,1 @@
-export const API_ROOT = "http://34.93.57.176/api/"
+export const API_ROOT = "http://35.200.223.244/api/"

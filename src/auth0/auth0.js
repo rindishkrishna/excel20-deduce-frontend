@@ -19,7 +19,8 @@ export const login = () => {
 export const getAccessToken = () => {
     const accessToken = localStorage.getItem('access_token_auth0');
     if (!accessToken) {
-        throw new Error('No Access Token found');
+        console.log("No access token for auth0 found, redirecting to login");
+        login()
     }
     return accessToken;
 }
@@ -46,7 +47,7 @@ const setSession = async (authResult, redirect) => {
     // access_token_auth0 is auth0's token used to obtain user info from auth0.
     // access_token is the JWT issued by the backend used for making requests to the backend.
     localStorage.setItem("access_token_auth0", authResult.accessToken);
-    let res = await postWithoutAuth(API_ROOT + "login", { "access_token": authResult.accessToken });
+    let res = await postWithoutAuth(`${API_ROOT}login`, { "access_token": authResult.accessToken });
     localStorage.setItem('access_token', res.access);
     localStorage.setItem('refresh_token', res.refresh);
     redirect('/');
