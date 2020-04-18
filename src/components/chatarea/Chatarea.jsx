@@ -2,7 +2,6 @@ import React from 'react';
 import './Chatarea.scss';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faAngleDown} from '@fortawesome/free-solid-svg-icons';
-import {faAngleLeft} from '@fortawesome/free-solid-svg-icons';
 import Chat from "../chat/src/App";
 
 function Chatarea(props) {

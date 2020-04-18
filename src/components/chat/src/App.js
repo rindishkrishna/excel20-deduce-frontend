@@ -29,7 +29,7 @@ const db = firebase.database();
   const messagesDivRef = useRef(null);
 
   function scrolledToBottom(el) {
-    return el.scrollHeight - el.scrollTop - el.clientHeight == 0;
+    return el.scrollHeight - el.scrollTop - el.clientHeight === 0;
   }
   const scrollToBottom = () => {
     if (messagesEndRef.current && !scrolled) {
