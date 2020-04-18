@@ -1,5 +1,11 @@
 @import '../../super.scss';
 
+$purple_0 : 'rgba(109,113,201,0)';
+$purple_shade : 'rgba(109,113,201,0.85)';
+
+$grey_0 : rgba(180,180,180,0);
+$grey_shade : rgba(100,100,100,1);
+
 #door-board{
     height: 90vh;
     background-color: $doorinfo-color;
@@ -92,3 +98,29 @@
 .color-purple{
     color: #A57BAF;
 }
+
+.door-info::before{
+    position: absolute;
+    content: '';
+    height: 18%;
+    width:1%;
+    background-color: $grey_shade;
+    transition: 10ms;
+}
+
+.door-info:hover::before{
+    transition: 10ms;
+    z-index: -1;
+    position: absolute;
+    content: '';
+    height: 18%;
+    width:35%;
+    background-color: rgba(0,0,0,0);
+    background-image: linear-gradient(to right, $grey_shade , $grey_0,$grey_0);
+}
+
+.door-info:hover{
+  color: #fefefe;
+}
+
+
