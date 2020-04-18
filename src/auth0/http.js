@@ -25,9 +25,24 @@ export const postWithoutAuth = (url, data) => {
         .catch(err => err);
 };
 
+export const post = (url, data) => {
+    let at = checkAuth();
+    if (at) {
+        return fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${at}`
+            }
+        }).then(res => res.json())
+            .catch(err => err)
+    }
+}
+
 export const get = url => {
     let at = checkAuth();
-    if (at !== false) {
+    if (at) {
         return fetch(url, {
             headers: {
                 "Authorization": `Bearer ${at}`
