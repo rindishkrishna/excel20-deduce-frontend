@@ -19,7 +19,8 @@ export const login = () => {
 export const getAccessToken = () => {
     const accessToken = localStorage.getItem('access_token_auth0');
     if (!accessToken) {
-        throw new Error('No Access Token found');
+        console.log("No access token for auth0 found, redirecting to login");
+        login()
     }
     return accessToken;
 }

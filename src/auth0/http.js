@@ -4,7 +4,8 @@ const checkAuth = () => {
     // Get access and refresh tokens
     let at = localStorage.getItem("access_token");
     let rt = localStorage.getItem("refresh_token");
-    if (at == null || rt == null) {
+    let at_auth0 = localStorage.getItem("access_token_auth0")
+    if (!at || !rt || !at_auth0) {
         // Login
         login();
         return false;

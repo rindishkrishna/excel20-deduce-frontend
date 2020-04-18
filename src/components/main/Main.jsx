@@ -57,6 +57,7 @@ function Main() {
     //Effect callbacks are synchronous to prevent race conditions
     (async () => {
       let res = await get(`${API_ROOT}question`);
+      console.log(res);
       setLevel(res);
     })();
   }, []);
