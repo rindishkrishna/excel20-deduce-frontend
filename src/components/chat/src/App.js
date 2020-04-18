@@ -26,7 +26,7 @@ const Chat = ({ name, email }) => {
   const messagesDivRef = useRef(null);
 
   function scrolledToBottom(el) {
-    return el.scrollHeight - el.scrollTop - el.clientHeight == 0;
+    return el.scrollHeight - el.scrollTop - el.clientHeight === 0;
   }
   const scrollToBottom = () => {
     if (messagesEndRef.current && !scrolled) {
@@ -68,7 +68,7 @@ const Chat = ({ name, email }) => {
       }
     };
     const size = window.localStorage.getItem("size");
-    if (size == 0 || size == null) {
+    if (size === 0 || size === null) {
       chatRoom.endAt().limitToLast(100).on("child_added", handleNewMessages);
     } else {
       setMessages(JSON.parse(window.localStorage.getItem("messages")));
