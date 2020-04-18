@@ -154,7 +154,7 @@ div {
 #scroll-icon {
   color: #ababab;
   height: 20px;
-  right: 25px;
+  left: 20%;
   bottom: 100px;
   position: fixed;
 }

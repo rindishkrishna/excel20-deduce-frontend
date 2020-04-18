@@ -20,16 +20,18 @@ export const getAccessToken = () => {
     const accessToken = localStorage.getItem('access_token_auth0');
     if (!accessToken) {
         console.log("No access token for auth0 found, redirecting to login");
-        login()
+        // login()
     }
     return accessToken;
 }
 
 export const getProfile = (callback) => {
     let accessToken = getAccessToken();
-    webAuth.client.userInfo(accessToken, (err, user) => {
-        callback(err, user);
-    });
+    if (accessToken != "undefined") {
+        webAuth.client.userInfo(accessToken, (err, user) => {
+            callback(err, user);
+        });
+    }
 }
 
 export const handleAuthentication = () => {
@@ -50,7 +52,7 @@ const setSession = async (authResult, redirect) => {
     let res = await postWithoutAuth(`${API_ROOT}login`, { "access_token": authResult.accessToken });
     localStorage.setItem('access_token', res.access);
     localStorage.setItem('refresh_token', res.refresh);
-    redirect('/');
+    redirect('/game');
 };
 
 export const logout = () => {
