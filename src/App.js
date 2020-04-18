@@ -11,38 +11,39 @@ function App() {
   const [screen, setScreen] = useState(true);
   const [user, setUser] = useState({
     name: "",
-    image: "",
+    image: ""
   });
 
   useEffect(() => {
     if (window.innerWidth < window.innerHeight) {
       setScreen(false);
     }
-    getProfile((err, user) => {
-      if (err) {
-        console.error(err);
-      } else {
-        setUser({
-          name: user.given_name,
-          image: user.picture,
-          email: user.email,
-        });
-      }
-    });
+    // getProfile((err, user) => {
+    //   if (err) {
+    //     console.error(err);
+    //   } else {
+    //     setUser({
+    //       name: user.given_name,
+    //       image: user.picture
+    //     })
+    //   }
+    // })
   }, []);
 
   return (
     <ContextProvider>
       <Router history={history}>
-        {screen ? (
-          <React.Fragment>
-            <Navbar score={30} name={user.name} image={user.image} />
-            <Main name={user.name} email={user.email} />
-          </React.Fragment>
-        ) : (
-          <Reload screen={setScreen} />
-        )}
         <Switch>
+          <Route exact path="/game">
+            {
+              screen ?
+                <React.Fragment>
+                  <Navbar score={30} name={user.name} image={user.image} />
+                  <Main />
+                </React.Fragment> :
+                <Reload screen={setScreen} />
+            }
+          </Route>
           <Route exact path="/login" render={() => login()} />
           <Route
             exact
