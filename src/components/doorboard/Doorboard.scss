@@ -40,7 +40,6 @@ $grey_shade : rgba(100,100,100,1);
         padding-left: 15%;
         .door{
             font-size: 6vh;
-            color: #ffffff;
         }
         .info{
             .door-name{
@@ -68,8 +67,8 @@ $grey_shade : rgba(100,100,100,1);
         }
     }
     .door-info:hover{
-        background-image: linear-gradient(to right,rgba(109,113,201,0.85), rgba(109,113,201,0),rgba(109,113,201,0), rgba(109,113,201,0));
-        color:#E2BCEB;
+        background-image: linear-gradient(to right,$grey_shade, $grey_0,$grey_0, $grey_0);
+        color:#fefefe;
     }
 }
 .bor{
@@ -78,7 +77,7 @@ $grey_shade : rgba(100,100,100,1);
 }
 .bor-tra{
     width: 22%;
-    border-left: solid 0.2vw #6d71c9;
+    border-left: solid 0.2vw $grey_shade;
 }
 
 #door-board::-webkit-scrollbar {
@@ -99,28 +98,28 @@ $grey_shade : rgba(100,100,100,1);
     color: #A57BAF;
 }
 
-.door-info::before{
-    position: absolute;
-    content: '';
-    height: 18%;
-    width:1%;
-    background-color: $grey_shade;
-    transition: 10ms;
-}
-
-.door-info:hover::before{
-    transition: 10ms;
-    z-index: -1;
-    position: absolute;
-    content: '';
-    height: 18%;
-    width:35%;
-    background-color: rgba(0,0,0,0);
-    background-image: linear-gradient(to right, $grey_shade , $grey_0,$grey_0);
-}
-
-.door-info:hover{
-  color: #fefefe;
-}
-
+//.door-info::before{
+//    position: absolute;
+//    content: '';
+//    height: 18%;
+//    width:1%;
+//    background-color: $grey_shade;
+//    transition: 10ms;
+//}
+//
+//.door-info:hover::before{
+//    transition: 10ms;
+//    z-index: -1;
+//    position: absolute;
+//    content: '';
+//    height: 18%;
+//    width:35%;
+//    background-color: rgba(0,0,0,0);
+//    background-image: linear-gradient(to right, $grey_shade , $grey_0,$grey_0);
+//}
+//
+//.door-info:hover{
+//  color: #fefefe;
+//}
+//
 
