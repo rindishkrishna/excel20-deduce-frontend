@@ -28,53 +28,85 @@ const db = firebase.database();
   const messagesEndRef = useRef(null);
   const messagesDivRef = useRef(null);
 
-  function scrolledToBottom(el) {
-    return el.scrollHeight - el.scrollTop - el.clientHeight == 0;
-  }
-  const scrollToBottom = () => {
-    if (messagesEndRef.current && !scrolled) {
-      console.log(scrolled, "qweqweqwe");
-      messagesEndRef.current.scrollIntoView();
-    }
-  };
-  useEffect(scrollToBottom, [messages]);
-  useEffect(scrollToBottom, []);
-  useEffect(() => {
-    const handleNewMessages = (data) => {
-      if (data.val()) {
-        setMessages((old) => {
-          return [...old, data.val()];
-        });
-      }
-    };
+     function scrolledToBottom(el) {
+         return el.scrollHeight - el.scrollTop - el.clientHeight == 0;
+     }
+     const scrollToBottom = () => {
+         if (messagesEndRef.current && !scrolled) {
+             messagesEndRef.current.scrollIntoView();
+         }
+     };
+     useEffect(scrollToBottom, [messages]);
+     useEffect(scrollToBottom, []);
+     useEffect(() => {
+         const handleNewMessages = (data) => {
+             if (data.val()) {
+                 const size = parseInt(window.localStorage.getItem("size"));
+                 const msgs = JSON.parse(window.localStorage.getItem("messages")) || [];
+                 if (size < 200) {
+                     window.localStorage.setItem("size", JSON.stringify(size + 1));
+                     window.localStorage.setItem("last", data.val().timestamp);
+                     window.localStorage.setItem(
+                         "messages",
+                         JSON.stringify([...msgs, data.val()])
+                     );
+                     setMessages((old) => {
+                         return [...msgs, data.val()];
+                     });
+                 } else {
+                     window.localStorage.setItem("last", data.val().timestamp);
+                     const newMessages = msgs.slice(msgs.length / 2);
+                     window.localStorage.setItem(
+                         "size",
+                         JSON.stringify(newMessages.length + 1)
+                     );
+                     window.localStorage.setItem(
+                         "messages",
+                         JSON.stringify([...newMessages, data.val()])
+                     );
+                     setMessages((old) => {
+                         return [...newMessages, data.val()];
+                     });
+                 }
+             }
+         };
+         const size = window.localStorage.getItem("size");
+         if (size == 0 || size == null) {
+             chatRoom.endAt().limitToLast(100).on("child_added", handleNewMessages);
+         } else {
+             setMessages(JSON.parse(window.localStorage.getItem("messages")));
+             chatRoom
+                 .orderByChild("timestamp")
+                 .startAt(parseInt(window.localStorage.getItem("last")))
+                 .on("child_added", handleNewMessages);
+         }
+         return () => {
+             chatRoom.off("child_added", handleNewMessages);
+         };
+         // eslint-disable-next-line
+     }, []);
 
-    chatRoom.endAt().limitToLast(25).on("child_added", handleNewMessages);
-    return () => {
-      chatRoom.off("child_added", handleNewMessages);
-    };
-    // eslint-disable-next-line
-  }, []);
+     const handleNameChange = (e) => setNickname(e.target.value);
+     const handleEmailChange = (e) => setEmail(e.target.value);
+     const handleClick = (e) => {
+         db.ref().child("nicknames").push({
+             nickname,
+             email,
+         });
+         setJoined(true);
+     };
 
-  const handleNameChange = (e) => setNickname(e.target.value);
-  const handleEmailChange = (e) => setEmail(e.target.value);
-  const handleClick = (e) => {
-    db.ref().child("nicknames").push({
-      nickname,
-      email,
-    });
-    setJoined(true);
-  };
-
-  const handleMsgChange = (e) => setMsg(e.target.value);
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      chatRoom.push({
-        sender: nickname,
-        msg,
-      });
-      setMsg("");
-    }
-  };
+     const handleMsgChange = (e) => setMsg(e.target.value);
+     const handleKeyDown = (e) => {
+         if (e.key === "Enter") {
+             chatRoom.push({
+                 sender: nickname,
+                 msg,
+                 timestamp: Date.now(),
+             });
+             setMsg("");
+         }
+     };
 
   return (
     <div className="chatApp">
