@@ -52,6 +52,8 @@ const setSession = async (authResult, redirect) => {
     let res = await postWithoutAuth(`${API_ROOT}login`, { "access_token": authResult.accessToken });
     localStorage.setItem('access_token', res.access);
     localStorage.setItem('refresh_token', res.refresh);
+    console.log("before redirect")
+    console.log(authResult.accessToken, res.access, res.refresh)
     redirect('/game');
 };
 
