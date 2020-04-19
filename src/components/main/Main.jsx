@@ -71,7 +71,7 @@ function Main(props) {
         (async () => {
           let res = await get(`${API_ROOT}currlevel`);
           if (res.level_number > currLevel) {
-            alert("Someone already solved this level!");
+            // alert("Someone already solved this level!");
             // Give some better visual feedback to user and reload page after a small delay to get new level
           }
         })();
@@ -131,24 +131,29 @@ function Main(props) {
               }`}
               onClick={() => notice()}
             >
-              {level.question && 
-              <div className="p">
-                <p>{level.question}</p>
-              </div>}
-              {level.level_file_4 &&
-              <div className="d-flex cont justify-content-center">
-                <img
-                  className="graf-clue mx-auto d-block"
-                  src={level.level_file_4}
-                  alt=""
-                />
-              </div>}
+              {level.question && (
+                <div className="p">
+                  <p>{level.question}</p>
+                </div>
+              )}
+              {level.level_file_4 && (
+                <div className="d-flex cont justify-content-center">
+                  <img
+                    className="graf-clue mx-auto d-block"
+                    src={level.level_file_4}
+                    alt=""
+                  />
+                </div>
+              )}
             </div>
           )}
         </div>
         <div id="door">
           <div className="d-img">
-            <div className="d-lock cursor-pointer" onClick={() => answer()}></div>
+            <div
+              className="d-lock cursor-pointer"
+              onClick={() => answer()}
+            ></div>
           </div>
         </div>
         <div id="photo" className="d-flex">
