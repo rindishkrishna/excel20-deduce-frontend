@@ -67,7 +67,7 @@ function Main(props) {
     // Check if someone unlocked the level this user is currently on every 60 seconds
     let interval = setInterval(() => {
       let currLevel = localStorage.getItem("level_number");
-      if (currLevel != "undefined" || currLevel != null) {
+      if (currLevel !== "undefined" || currLevel != null) {
         (async () => {
           let res = await get(`${API_ROOT}currlevel`);
           if (res.level_number > currLevel) {
