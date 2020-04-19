@@ -1,3 +1,6 @@
+/* eslint-disable */
+// Temperorily disabling eslint to make some changes
+
 import React, { useEffect, useState } from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import ContextProvider from "./context/context";
