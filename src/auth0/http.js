@@ -5,7 +5,7 @@ const checkAuth = () => {
     let at = localStorage.getItem("access_token");
     let rt = localStorage.getItem("refresh_token");
     let at_auth0 = localStorage.getItem("access_token_auth0")
-    if (at == "undefined" || rt == "undefined" || at_auth0 == "undefined" || !at || !rt || !at_auth0) {
+    if (at === "undefined" || rt === "undefined" || at_auth0 === "undefined" || !at || !rt || !at_auth0) {
         // Login
         login();
         return false;

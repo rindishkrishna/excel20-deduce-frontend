@@ -27,7 +27,7 @@ export const getAccessToken = () => {
 
 export const getProfile = (callback) => {
     let accessToken = getAccessToken();
-    if (accessToken != "undefined") {
+    if (accessToken !== "undefined") {
         webAuth.client.userInfo(accessToken, (err, user) => {
             callback(err, user);
         });
