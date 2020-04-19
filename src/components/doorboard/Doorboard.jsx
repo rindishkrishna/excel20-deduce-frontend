@@ -7,7 +7,7 @@ import {faAngleRight} from '@fortawesome/free-solid-svg-icons';
 function Doorboard(props) {
     return(
         <div id="door-board" className={`bor ${props.bor ? "bor-tra" : ""}`}>
-            <div className={`toggle-2 ${props.bor ? "togg-tra" : ""}`} onClick={() => props.toggle()}>
+            <div className={`toggle-2 cursor-pointer ${props.bor ? "togg-tra" : ""}`} onClick={() => props.toggle()}>
                 <FontAwesomeIcon onClick={() => props.toggle()} icon = {faAngleRight} />
             </div>
             

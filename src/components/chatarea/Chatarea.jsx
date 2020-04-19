@@ -13,7 +13,7 @@ function Chatarea(props) {
       <div>
         <FontAwesomeIcon
           onClick={() => props.toggle()}
-          className={`toggle-3 ${props.cha ? "togg-tra" : " "}`}
+          className={`toggle-3 cursor-pointer ${props.cha ? "togg-tra" : " "}`}
           icon={faAngleDown}
         />
         <h6 className="text-center grey-3 pt-2 pb-1">DISCUSSION BOARD</h6>

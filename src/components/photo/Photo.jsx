@@ -6,7 +6,7 @@ import './Photo.scss';
 function Photo(props) {
     return(
         <div id="photo-model">
-            <FontAwesomeIcon onClick={() => props.toggle()} className="close" icon = {faTimesCircle} />
+            <FontAwesomeIcon onClick={() => props.toggle()} className="close cursor-pointer" icon = {faTimesCircle} />
             <div className="clue">
                 <img className="clue-img img-fluid mx-auto d-block" src={props.link} alt="" />
             </div>

@@ -68,7 +68,7 @@ function Answer(props) {
     <div id="answer-model">
       <FontAwesomeIcon
         onClick={() => props.toggle()}
-        className="close"
+        className="close cursor-pointer"
         icon={faTimesCircle}
       />
       <input
@@ -81,7 +81,7 @@ function Answer(props) {
       <div className="inpp">
         {list}
         <button className="enter butt" onClick={() => click()}>
-          <p>enter</p>
+          <p>Enter</p>
         </button>
         <button
           className="reset butt"

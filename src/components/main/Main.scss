@@ -59,15 +59,30 @@
                 height: 50%;
                 z-index: 40;
                 transition: all 0.5s;
-                .graf-clue{
+                font-size: 2.8vh;
+                line-height: 3vh;
+                .p{
                     width: 100%;
-                    height: auto;
-                    object-fit: contain;
+                    background-color: black;
+                    color: white;
+                    padding: 1vh;
+                    margin-bottom: 1vh;
+                }
+                .cont{
+                    width: 100%;
+                    height: inherit;
+                    .graf-clue{
+                        width: 100%;
+                        max-height: 100%;
+                        object-fit: contain;
+                    }
                 }
             }
             .big-n{
-                width: 25%;
-                height: 70%;
+                width: 27%;
+                height: 75%;
+                font-size: 4vh;
+                line-height: 4vh;
             }
         }
         #door{
@@ -126,6 +141,9 @@
             }
         }
     }
+}
+.cursor-pointer{
+    cursor: pointer;
 }
 
 @keyframes mascot {
