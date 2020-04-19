@@ -84,13 +84,13 @@ function Main(props) {
   return (
     <div id="main">
       <div
-        className={`door-btn ${isBoard ? "toggle-chat" : ""}`}
+        className={`door-btn cursor-pointer ${isBoard ? "toggle-chat" : ""}`}
         onClick={() => board()}
       >
         <FontAwesomeIcon icon={faAngleLeft} />
       </div>
       <div
-        className={`chat-btn ${isChat ? "toggle-chat" : ""}`}
+        className={`chat-btn cursor-pointer ${isChat ? "toggle-chat" : ""}`}
         onClick={() => chat()}
       >
         <p>
@@ -113,7 +113,7 @@ function Main(props) {
           src={require("../../assets/images/mascot.png")}
           alt=""
           id="mascot"
-          className={anime ? "mascot" : ""}
+          className={`cursor-pointer ${anime ? "mascot" : ""}`}
           onClick={() => setAnime(true)}
           onAnimationEnd={() => setAnime(false)}
         />
@@ -124,24 +124,31 @@ function Main(props) {
           {level.level_file_1 && (
             <Imagebox photo={photo} image={level.level_file_1} />
           )}
-          {level.level_file_4 && (
+          {(level.level_file_4 || level.question) && (
             <div
-              className={`graf d-flex justify-content-center ${
+              className={`graf cursor-pointer text-center ${
                 isNotice ? "big-n" : ""
               }`}
               onClick={() => notice()}
             >
-              <img
-                className="graf-clue mx-auto d-block"
-                src={level.level_file_4}
-                alt=""
-              />
+              {level.question && 
+              <div className="p">
+                <p>{level.question}</p>
+              </div>}
+              {level.level_file_4 &&
+              <div className="d-flex cont justify-content-center">
+                <img
+                  className="graf-clue mx-auto d-block"
+                  src={level.level_file_4}
+                  alt=""
+                />
+              </div>}
             </div>
           )}
         </div>
         <div id="door">
           <div className="d-img">
-            <div className="d-lock" onClick={() => answer()}></div>
+            <div className="d-lock cursor-pointer" onClick={() => answer()}></div>
           </div>
         </div>
         <div id="photo" className="d-flex">
