@@ -1,3 +1,5 @@
+@import '../../super.scss';
+
 #main{
     height: 90vh;
     width: 100%;
@@ -51,11 +53,41 @@
         .bulb{
             position: absolute;
             color: gold;
-            top: 20%;
+            bottom: 50%;
             left: 6%;
             font-size: 7vh;
             animation: hint 1s infinite;
             z-index: 26;
+        }
+        .bubble{
+            position: absolute;
+            background-color: $bubble-color;
+            text-align: center;
+            border-radius: 5px;
+            bottom: 60%;
+            left: 6%;
+            z-index: 26;
+            padding: 1vh;
+            width: 20%;
+            height: auto;
+            p{
+                margin: 0px;
+                font-size:2vh;
+            }
+        }
+        .bubble:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0%;
+            width: 0;
+            height: 0;
+            border: 3vh solid transparent;
+            border-top-color: $bubble-color;
+            border-bottom: 0;
+            border-left: 0;
+            margin-left: 5%;
+            margin-bottom: -3vh;
         }
         #mascot{
             position: absolute;

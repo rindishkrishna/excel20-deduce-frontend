@@ -21,6 +21,7 @@ function Main(props) {
     hints: [],
   });
   const [isBoard, setBoard] = useState(false);
+  const [isBubble, setBubble] = useState(false);
   const [isPhoto, setPhoto] = useState({
     state: false,
     image: "",
@@ -91,7 +92,7 @@ function Main(props) {
       >
         <FontAwesomeIcon icon={faAngleLeft} />
       </div>
-{/*      <div
+      {/*      <div
         className={`chat-btn cursor-pointer ${isChat ? "toggle-chat" : ""}`}
         onClick={() => chat()}
       >
@@ -112,7 +113,12 @@ function Main(props) {
 
       <div className="mascot-hint">
         {(!anime && level.hints.length  > 0) && <div>
-          <FontAwesomeIcon className="bulb cursor-pointer" icon={faLightbulb} />
+          {isBubble ? 
+          (<div onClick={() => setBubble(false)} className="bubble cursor-pointer">
+            {level.hints.map((x, i) => <p key={i}>{x.hint}</p>)}
+          </div>):
+          <FontAwesomeIcon onClick={() => setBubble(true)} className="bulb cursor-pointer" 
+          icon={faLightbulb} />}
         </div>}
         <img
           src={require("../../assets/images/mascot.png")}
