@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faCommentDots } from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import Doorboard from "../doorboard/Doorboard";
 import Chatarea from "../chatarea/Chatarea";
 import Photo from "../photo/Photo";
@@ -89,14 +89,6 @@ function Main(props) {
       >
         <FontAwesomeIcon icon={faAngleLeft} />
       </div>
-      <div
-        className={`chat-btn cursor-pointer ${isChat ? "toggle-chat" : ""}`}
-        onClick={() => chat()}
-      >
-        <p>
-          chat <FontAwesomeIcon icon={faCommentDots} />
-        </p>
-      </div>
 
       <Chatarea
         toggle={chat}
@@ -124,25 +116,16 @@ function Main(props) {
           {level.level_file_1 && (
             <Imagebox photo={photo} image={level.level_file_1} />
           )}
-          {(level.level_file_4 || level.question) && (
+          {level.question && (
             <div
               className={`graf cursor-pointer text-center ${
                 isNotice ? "big-n" : ""
               }`}
               onClick={() => notice()}
             >
-              {level.question && 
               <div className="p">
                 <p>{level.question}</p>
-              </div>}
-              {level.level_file_4 &&
-              <div className="d-flex cont justify-content-center">
-                <img
-                  className="graf-clue mx-auto d-block"
-                  src={level.level_file_4}
-                  alt=""
-                />
-              </div>}
+              </div>
             </div>
           )}
         </div>

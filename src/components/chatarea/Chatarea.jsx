@@ -10,12 +10,11 @@ function Chatarea(props) {
       id="chat-area"
       className={`cha d-flex  flex-column ${props.cha ? "cha-tra" : " "}`}
     >
-      <div>
-        <FontAwesomeIcon
-          onClick={() => props.toggle()}
+      <div className="cursor-pointer" onClick={() => props.toggle()}>
+        {props.cha && <FontAwesomeIcon
           className={`toggle-3 cursor-pointer ${props.cha ? "togg-tra" : " "}`}
           icon={faAngleDown}
-        />
+        />}
         <h6 className="text-center grey-3 pt-2 pb-1">DISCUSSION BOARD</h6>
       </div>
       <Chat name={props.name} email={props.email} />
