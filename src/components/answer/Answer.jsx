@@ -9,12 +9,20 @@ function Answer(props) {
   const [text, setText] = useState("");
   const click = () => {
     (async () => {
-      let res = await post(`${API_ROOT}answer`, { answer: text });
-      if (!res.correct_answer) {
-        alert("Wrong answer!");
+      let level_number = localStorage.getItem("level_number");
+      if (level_number === "undefined" || level_number === null) {
+        console.log("Level number corrupted");
       } else {
-        alert("Correct answer!");
-        setTimeout(() => window.location.reload(), 2000);
+        let res = await post(`${API_ROOT}answer`, {
+          answer: text,
+          level_number: level_number,
+        });
+        if (!res.correct_answer) {
+          alert("Wrong answer!");
+        } else {
+          alert("Correct answer!");
+          setTimeout(() => window.location.reload(), 2000);
+        }
       }
     })();
   };
