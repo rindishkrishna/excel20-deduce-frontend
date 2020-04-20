@@ -89,14 +89,14 @@ function Main(props) {
       >
         <FontAwesomeIcon icon={faAngleLeft} />
       </div>
-      <div
+{/*      <div
         className={`chat-btn cursor-pointer ${isChat ? "toggle-chat" : ""}`}
         onClick={() => chat()}
       >
         <p>
           chat <FontAwesomeIcon icon={faCommentDots} />
         </p>
-      </div>
+      </div>*/}
 
       <Chatarea
         toggle={chat}
