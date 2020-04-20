@@ -24,7 +24,7 @@ function App() {
       <Router history={history}>
         <Switch>
           <Route exact path="/game" render={() => (
-            localStorage.getItem("access_token") ? 
+            localStorage.getItem("access_token_auth0") ? 
             (
                 screen ?
                 (<React.Fragment>
