@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import "./Chat.css";
 import { ReactComponent as Down } from "./down.svg";
 import * as firebase from "firebase";
-import PropTypes from 'prop-types'
 import {getProfile} from "../../../auth0/auth0";
 
 const firebaseConfig = {
@@ -59,7 +58,16 @@ const Chat = ({ name, email }) => {
     const handleNewMessages = (data) => {
       if (data.val()) {
         const size = parseInt(window.localStorage.getItem("size"));
-        const msgs = JSON.parse(window.localStorage.getItem("messages")) || [];
+        let msgs = JSON.parse(window.localStorage.getItem("messages")) || [];
+        if(msgs.length) {
+          if (
+              data.val().timestamp === msgs[msgs.length - 1 || 0].timestamp &&
+              data.val().email === msgs[msgs.length - 1].email
+          ) {
+            msgs = msgs.slice(0, msgs.length - 1);
+            console.log(msgs);
+          }
+        }
         if (size < 200) {
           window.localStorage.setItem("size", JSON.stringify(size + 1));
           window.localStorage.setItem("last", data.val().timestamp);
@@ -88,13 +96,23 @@ const Chat = ({ name, email }) => {
       }
     };
     const size = window.localStorage.getItem("size");
+    const cacheClearances = window.localStorage.getItem("cacheClearances");
     db.ref()
         .child("blast-local")
         .once("value", (data) => {
-          if (data.val() === true) {
+          console.log(cacheClearances);
+          if (
+              cacheClearances === null ||
+              data.val() > parseInt(cacheClearances)
+          ) {
+            console.log(cacheClearances);
             window.localStorage.removeItem("size");
             window.localStorage.removeItem("last");
             window.localStorage.removeItem("messages");
+            window.localStorage.setItem(
+                "cacheClearances",
+                JSON.stringify(data.val())
+            );
           }
         });
     if (size === 0 || size === null) {
@@ -111,6 +129,7 @@ const Chat = ({ name, email }) => {
     };
     // eslint-disable-next-line
   }, []);
+
 
   const handleMsgChange = (e) => setMsg(e.target.value);
   const handleKeyDown = (e) => {
