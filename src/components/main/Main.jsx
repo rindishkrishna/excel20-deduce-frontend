@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft, faLightbulb } from "@fortawesome/free-solid-svg-icons";
 import Doorboard from "../doorboard/Doorboard";
 import Chatarea from "../chatarea/Chatarea";
 import Photo from "../photo/Photo";
@@ -16,7 +16,6 @@ function Main(props) {
     level_file_1: null,
     level_file_2: null,
     level_file_3: null,
-    level_file_4: null,
     cover_image: null,
     question: null,
     hints: [],
@@ -69,9 +68,9 @@ function Main(props) {
       let currLevel = localStorage.getItem("level_number");
       if (currLevel !== "undefined" || currLevel != null) {
         (async () => {
-          let res = await get(`${API_ROOT}currlevel`);
+          let res = await get(`${API_ROOT}current_level`);
           if (res.level_number > currLevel) {
-            alert("Someone already solved this level!");
+            // alert("Someone already solved this level!");
             // Give some better visual feedback to user and reload page after a small delay to get new level
           }
         })();
@@ -83,6 +82,9 @@ function Main(props) {
 
   return (
     <div id="main">
+      {level.cover_image && <div className="cover-image">
+          <img className="cover-clue" src={level.cover_image} alt="" />
+      </div>}
       <div
         className={`door-btn cursor-pointer ${isBoard ? "toggle-chat" : ""}`}
         onClick={() => board()}
@@ -100,7 +102,10 @@ function Main(props) {
       {isPhoto.state && <Photo toggle={photo} link={isPhoto.image} />}
       {isAnswer && <Answer toggle={answer} />}
 
-      <div>
+      <div className="mascot-hint">
+        {(!anime && level.hints.length  > 0) && <div>
+          <FontAwesomeIcon className="bulb cursor-pointer" icon={faLightbulb} />
+        </div>}
         <img
           src={require("../../assets/images/mascot.png")}
           alt=""
@@ -131,7 +136,10 @@ function Main(props) {
         </div>
         <div id="door">
           <div className="d-img">
-            <div className="d-lock cursor-pointer" onClick={() => answer()}></div>
+            <div
+              className="d-lock cursor-pointer"
+              onClick={() => answer()}
+            ></div>
           </div>
         </div>
         <div id="photo" className="d-flex">

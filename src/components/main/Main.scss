@@ -3,6 +3,16 @@
     width: 100%;
     background-image: url('../../assets/images/with\ florr.jpg');
     background-size: 100% 100%;
+    .cover-image{
+        position: absolute;
+        width: 100%;
+        height: 67.5%;
+        z-index: 0;
+        .cover-clue{
+            height: 100%;
+            width: 100%;
+        }
+    }
     .door-btn{
         position: absolute;
         right: 0%;
@@ -32,15 +42,31 @@
     .toggle-chat{
         opacity: 0;
     }
-    #mascot{
-        position: absolute;
-        height: 20%;
-        //top:70%;
+    .mascot-hint{
+        width: 100%;
+        position: fixed;
         bottom: 10%;
+        height: 30%;
         z-index: 25;
-    }
-    .mascot{
-        animation: mascot 6s 1;
+        .bulb{
+            position: absolute;
+            color: gold;
+            top: 20%;
+            left: 6%;
+            font-size: 7vh;
+            animation: hint 1s infinite;
+            z-index: 26;
+        }
+        #mascot{
+            position: absolute;
+            bottom: 0%;
+            height: 65%;
+            //top:70%;
+            z-index: 25;
+        }
+        .mascot{
+            animation: mascot 6s 1;
+        }
     }
     .contain{
         height: 100%;
@@ -50,7 +76,7 @@
             grid-column: 1/2;
             height: 90vh;
             .graf{
-                border : solid 1vh;
+                border : solid 1vh #523629;
                 background-color: white;
                 position: absolute;
                 top:25%;
@@ -66,7 +92,7 @@
             }
             .big-n{
                 width: 36%;
-                border : solid 2vh;
+                border : solid 2vh #523629;
                 font-size: 5.6vh;
                 left: 50%;
                 position: fixed;
@@ -150,5 +176,19 @@
     }
     100%{
         left : 0%;
+    }
+}
+@keyframes hint{
+    0%{
+        transform: scale(.9) rotateZ(20deg);
+        color: goldenrod;
+    }
+    50%{
+        transform: scale(1) rotateZ(20deg);
+        color: gold;
+    }
+    100%{
+        transform: scale(.9) rotateZ(20deg);
+        color: goldenrod;
     }
 }
