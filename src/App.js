@@ -1,4 +1,3 @@
-/* eslint-disable */
 // Temperorily disabling eslint to make some changes
 
 import React, { useEffect, useState } from "react";
@@ -8,10 +7,11 @@ import Navbar from "./components/navbar/Navbar";
 import Main from "./components/main/Main";
 import history from "./utils/history";
 import Reload from "./components/reload/Reload";
-import { login, handleAuthentication} from "./auth0/auth0";
+import {login, handleAuthentication, getProfile} from "./auth0/auth0";
 
 function App() {
   const [screen, setScreen] = useState(true);
+
 
   useEffect(() => {
     if (window.innerWidth < window.innerHeight) {

@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import "./Chat.css";
 import { ReactComponent as Down } from "./down.svg";
 import * as firebase from "firebase";
+import PropTypes from 'prop-types'
+import {getProfile} from "../../../auth0/auth0";
 
 const firebaseConfig = {
   apiKey: "AIzaSyD2KCjdds6S99QiRIlMWd4pfv8n14vhbvM",
@@ -25,6 +27,9 @@ const Chat = ({ name, email }) => {
   const messagesEndRef = useRef(null);
   const messagesDivRef = useRef(null);
 
+  const [profile,setProfile] = useState({});
+
+
   function scrolledToBottom(el) {
     return el.scrollHeight - el.scrollTop - el.clientHeight === 0;
   }
@@ -33,6 +38,21 @@ const Chat = ({ name, email }) => {
       messagesEndRef.current.scrollIntoView();
     }
   };
+
+
+  useEffect(()=>{
+    getProfile((err, user) => {
+      if (err) {
+        console.error(err);
+      } else {
+        setProfile({
+          name: user.given_name,
+          email: user.email
+        })
+      }
+    })
+  },[]);
+
   useEffect(scrollToBottom, [messages]);
   useEffect(scrollToBottom, []);
   useEffect(() => {
@@ -44,8 +64,8 @@ const Chat = ({ name, email }) => {
           window.localStorage.setItem("size", JSON.stringify(size + 1));
           window.localStorage.setItem("last", data.val().timestamp);
           window.localStorage.setItem(
-            "messages",
-            JSON.stringify([...msgs, data.val()])
+              "messages",
+              JSON.stringify([...msgs, data.val()])
           );
           setMessages((old) => {
             return [...msgs, data.val()];
@@ -54,12 +74,12 @@ const Chat = ({ name, email }) => {
           window.localStorage.setItem("last", data.val().timestamp);
           const newMessages = msgs.slice(msgs.length / 2);
           window.localStorage.setItem(
-            "size",
-            JSON.stringify(newMessages.length + 1)
+              "size",
+              JSON.stringify(newMessages.length + 1)
           );
           window.localStorage.setItem(
-            "messages",
-            JSON.stringify([...newMessages, data.val()])
+              "messages",
+              JSON.stringify([...newMessages, data.val()])
           );
           setMessages((old) => {
             return [...newMessages, data.val()];
@@ -68,14 +88,23 @@ const Chat = ({ name, email }) => {
       }
     };
     const size = window.localStorage.getItem("size");
+    db.ref()
+        .child("blast-local")
+        .once("value", (data) => {
+          if (data.val() === true) {
+            window.localStorage.removeItem("size");
+            window.localStorage.removeItem("last");
+            window.localStorage.removeItem("messages");
+          }
+        });
     if (size === 0 || size === null) {
       chatRoom.endAt().limitToLast(100).on("child_added", handleNewMessages);
     } else {
       setMessages(JSON.parse(window.localStorage.getItem("messages")));
       chatRoom
-        .orderByChild("timestamp")
-        .startAt(parseInt(window.localStorage.getItem("last")))
-        .on("child_added", handleNewMessages);
+          .orderByChild("timestamp")
+          .startAt(parseInt(window.localStorage.getItem("last")))
+          .on("child_added", handleNewMessages);
     }
     return () => {
       chatRoom.off("child_added", handleNewMessages);
@@ -87,8 +116,8 @@ const Chat = ({ name, email }) => {
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       chatRoom.push({
-        sender: name,
-        email: email,
+        sender: profile.name || "",
+        email: profile.email || "",
         msg,
         timestamp: Date.now(),
       });
@@ -120,7 +149,7 @@ const Chat = ({ name, email }) => {
         >
           {messages.map((message) => {
             // console.log(message);
-            if (message["email"] === email)
+            if (message["email"] === profile.email)
               return (
                 <div className="my-message">
                   {/*<span id="me">{message["sender"]} :</span>*/}
@@ -162,4 +191,5 @@ const Chat = ({ name, email }) => {
     </div>
   );
 };
+
 export default Chat;
