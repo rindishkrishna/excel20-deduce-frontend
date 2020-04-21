@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft, faLightbulb } from "@fortawesome/free-solid-svg-icons";
 import Doorboard from "../doorboard/Doorboard";
 import Chatarea from "../chatarea/Chatarea";
 import Photo from "../photo/Photo";
@@ -16,12 +16,12 @@ function Main(props) {
     level_file_1: null,
     level_file_2: null,
     level_file_3: null,
-    level_file_4: null,
     cover_image: null,
     question: null,
-    hints: [],
+    hints: null,
   });
   const [isBoard, setBoard] = useState(false);
+  const [isBubble, setBubble] = useState(false);
   const [isPhoto, setPhoto] = useState({
     state: false,
     image: "",
@@ -69,7 +69,7 @@ function Main(props) {
       let currLevel = localStorage.getItem("level_number");
       if (currLevel !== "undefined" || currLevel != null) {
         (async () => {
-          let res = await get(`${API_ROOT}currlevel`);
+          let res = await get(`${API_ROOT}current_level`);
           if (res.level_number > currLevel) {
             // alert("Someone already solved this level!");
             // Give some better visual feedback to user and reload page after a small delay to get new level
@@ -83,6 +83,9 @@ function Main(props) {
 
   return (
     <div id="main">
+      {level.cover_image && <div className="cover-image">
+          <img className="cover-clue" src={level.cover_image} alt="" />
+      </div>}
       <div
         className={`door-btn cursor-pointer ${isBoard ? "toggle-chat" : ""}`}
         onClick={() => board()}
@@ -108,7 +111,15 @@ function Main(props) {
       {isPhoto.state && <Photo toggle={photo} link={isPhoto.image} />}
       {isAnswer && <Answer toggle={answer} />}
 
-      <div>
+      <div className="mascot-hint">
+        {(!anime && level.hints) && <div>
+          {isBubble ? 
+          (<div onClick={() => setBubble(false)} className="bubble cursor-pointer">
+            {level.hints.map((x, i) => <p key={i}>{x.hint}</p>)}
+          </div>):
+          <FontAwesomeIcon onClick={() => setBubble(true)} className="bulb cursor-pointer" 
+          icon={faLightbulb} />}
+        </div>}
         <img
           src={require("../../assets/images/mascot.png")}
           alt=""
@@ -124,27 +135,16 @@ function Main(props) {
           {level.level_file_1 && (
             <Imagebox photo={photo} image={level.level_file_1} />
           )}
-          {(level.level_file_4 || level.question) && (
+          {level.question && (
             <div
               className={`graf cursor-pointer text-center ${
                 isNotice ? "big-n" : ""
               }`}
               onClick={() => notice()}
             >
-              {level.question && (
-                <div className="p">
-                  <p>{level.question}</p>
-                </div>
-              )}
-              {level.level_file_4 && (
-                <div className="d-flex cont justify-content-center">
-                  <img
-                    className="graf-clue mx-auto d-block"
-                    src={level.level_file_4}
-                    alt=""
-                  />
-                </div>
-              )}
+              <div className="p">
+                <p>{level.question}</p>
+              </div>
             </div>
           )}
         </div>
