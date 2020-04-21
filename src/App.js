@@ -2,7 +2,7 @@
 // Temperorily disabling eslint to make some changes
 
 import React, { useEffect, useState } from "react";
-import { Router, Route, Switch } from "react-router-dom";
+import { Router, Route, Switch, Redirect } from "react-router-dom";
 import ContextProvider from "./context/context";
 import Navbar from "./components/navbar/Navbar";
 import Main from "./components/main/Main";
@@ -23,16 +23,18 @@ function App() {
     <ContextProvider>
       <Router history={history}>
         <Switch>
-          <Route exact path="/game">
-            {
-              screen ?
-                <React.Fragment>
+          <Route exact path="/game" render={() => (
+            localStorage.getItem("access_token_auth0") ? 
+            (
+                screen ?
+                (<React.Fragment>
                   <Navbar score={30} />
                   <Main />
-                </React.Fragment> :
-                <Reload screen={setScreen} />
-            }
-          </Route>
+                </React.Fragment>) :
+                (<Reload screen={setScreen} />)
+            ):
+            (<Redirect to="/login" />)
+          )} />
           <Route exact path="/login" render={() => login()} />
           <Route
             exact
