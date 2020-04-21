@@ -6,7 +6,6 @@
     "rewrites": [
       {
         "source": "**",
-        "destination": "/index.html",
 	"run": {
 		"serviceId":"deduce-backend",
 		"region": "asia-east1"
