@@ -18,7 +18,7 @@ function Main(props) {
     level_file_3: null,
     cover_image: null,
     question: null,
-    hints: [],
+    hints: null,
   });
   const [isBoard, setBoard] = useState(false);
   const [isBubble, setBubble] = useState(false);
@@ -112,7 +112,7 @@ function Main(props) {
       {isAnswer && <Answer toggle={answer} />}
 
       <div className="mascot-hint">
-        {(!anime && level.hints.length  > 0) && <div>
+        {(!anime && level.hints) && <div>
           {isBubble ? 
           (<div onClick={() => setBubble(false)} className="bubble cursor-pointer">
             {level.hints.map((x, i) => <p key={i}>{x.hint}</p>)}
