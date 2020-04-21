@@ -1,20 +1,8 @@
-@import '../../super.scss';
-
 #main{
     height: 90vh;
     width: 100%;
     background-image: url('../../assets/images/with\ florr.jpg');
     background-size: 100% 100%;
-    .cover-image{
-        position: absolute;
-        width: 100%;
-        height: 67.5%;
-        z-index: 0;
-        .cover-clue{
-            height: 100%;
-            width: 100%;
-        }
-    }
     .door-btn{
         position: absolute;
         right: 0%;
@@ -44,61 +32,15 @@
     .toggle-chat{
         opacity: 0;
     }
-    .mascot-hint{
-        width: 100%;
-        position: fixed;
+    #mascot{
+        position: absolute;
+        height: 20%;
+        //top:70%;
         bottom: 10%;
-        height: 30%;
         z-index: 25;
-        .bulb{
-            position: absolute;
-            color: gold;
-            bottom: 50%;
-            left: 6%;
-            font-size: 7vh;
-            animation: hint 1s infinite;
-            z-index: 26;
-        }
-        .bubble{
-            position: absolute;
-            background-color: $bubble-color;
-            text-align: center;
-            border-radius: 5px;
-            bottom: 60%;
-            left: 6%;
-            z-index: 26;
-            padding: 1vh;
-            width: 20%;
-            height: auto;
-            p{
-                margin: 0px;
-                font-size:2vh;
-            }
-        }
-        .bubble:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0%;
-            width: 0;
-            height: 0;
-            border: 3vh solid transparent;
-            border-top-color: $bubble-color;
-            border-bottom: 0;
-            border-left: 0;
-            margin-left: 5%;
-            margin-bottom: -3vh;
-        }
-        #mascot{
-            position: absolute;
-            bottom: 0%;
-            height: 65%;
-            //top:70%;
-            z-index: 25;
-        }
-        .mascot{
-            animation: mascot 6s 1;
-        }
+    }
+    .mascot{
+        animation: mascot 6s 1;
     }
     .contain{
         height: 100%;
@@ -108,27 +50,39 @@
             grid-column: 1/2;
             height: 90vh;
             .graf{
-                border : solid 1vh #523629;
+                border : solid;
                 background-color: white;
                 position: absolute;
-                top:25%;
+                top:20%;
                 left: 15%;
                 width: 18%;
+                height: 50%;
                 z-index: 40;
                 transition: all 0.5s;
                 font-size: 2.8vh;
+                line-height: 3vh;
                 .p{
-                    margin-top: 1vh;
                     width: 100%;
+                    background-color: black;
+                    color: white;
+                    padding: 1vh;
+                    margin-bottom: 1vh;
+                }
+                .cont{
+                    width: 100%;
+                    height: inherit;
+                    .graf-clue{
+                        width: 100%;
+                        max-height: 100%;
+                        object-fit: contain;
+                    }
                 }
             }
             .big-n{
-                width: 36%;
-                border : solid 2vh #523629;
-                font-size: 5.6vh;
-                left: 50%;
-                position: fixed;
-                margin-left: -18%;
+                width: 27%;
+                height: 75%;
+                font-size: 4vh;
+                line-height: 4vh;
             }
         }
         #door{
@@ -208,19 +162,5 @@
     }
     100%{
         left : 0%;
-    }
-}
-@keyframes hint{
-    0%{
-        transform: scale(.9) rotateZ(20deg);
-        color: goldenrod;
-    }
-    50%{
-        transform: scale(1) rotateZ(20deg);
-        color: gold;
-    }
-    100%{
-        transform: scale(.9) rotateZ(20deg);
-        color: goldenrod;
     }
 }
