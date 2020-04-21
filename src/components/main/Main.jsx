@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faCommentDots } from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import Doorboard from "../doorboard/Doorboard";
 import Chatarea from "../chatarea/Chatarea";
 import Photo from "../photo/Photo";
@@ -89,7 +89,7 @@ function Main(props) {
       >
         <FontAwesomeIcon icon={faAngleLeft} />
       </div>
-{/*      <div
+      {/*      <div
         className={`chat-btn cursor-pointer ${isChat ? "toggle-chat" : ""}`}
         onClick={() => chat()}
       >
