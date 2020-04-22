@@ -17,18 +17,18 @@ $grey_shade : rgba(100,100,100,1);
     overflow-x: hidden;
     .toggle-2{
         position: fixed;
-        font-size: 4vh;
-        right: -2.5%;
+        font-size: 4.9vh;
+        right: -3%;
         transition: all 0.5s;
         top: 50%;
-        background-color: white;
-        border-radius: 0px 5px 5px 0px;
-        width: 2.5%;
-        height: 5.5vh;
+        background-color:white;
+        border-radius: 0px 10px 10px 0px;
+        width: 3%;
+        height: 7vh;
         text-align: center;
     }
     .togg-tra{
-        right: 19.3%;
+        right: 19%;
     }
     .door-info{
         width: 100%;
