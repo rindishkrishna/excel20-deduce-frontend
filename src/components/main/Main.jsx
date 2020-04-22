@@ -82,7 +82,7 @@ function Main(props) {
   }, []);
 
   return (
-    <div id="main">
+    <div id="main" className="cursor-default">
       {level.cover_image && <div className="cover-image">
           <img className="cover-clue" src={level.cover_image} alt="" />
       </div>}

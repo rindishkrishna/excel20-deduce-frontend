@@ -8,7 +8,7 @@ function Chatarea(props) {
   return (
     <div
       id="chat-area"
-      className={`cha d-flex  flex-column ${props.cha ? "cha-tra" : " "}`}
+      className={`cha d-flex cursor-default flex-column ${props.cha ? "cha-tra" : " "}`}
     >
       <div className={"position-sticky"} style={{top:0}}>
         <FontAwesomeIcon

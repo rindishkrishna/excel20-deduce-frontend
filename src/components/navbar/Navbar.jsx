@@ -20,7 +20,7 @@ function Navbar(props) {
      })
     },[])
     return(
-        <nav className="navbar nbar navbar-light d-flex">
+        <nav className="navbar cursor-default nbar navbar-light d-flex">
             <a className="navbar-brand" href="/">
                 <img src={require('../../assets/images/logo.png')} className="d-inline-block align-top logo" alt="" />
             </a>
