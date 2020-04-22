@@ -1,6 +1,8 @@
 import './Navbar.scss';
 import React, {useEffect, useState} from 'react';
-import {getProfile} from '../../auth0/auth0';
+//import {getProfile} from '../../auth0/auth0';
+import {get} from '../../auth0/http';
+import {API_ROOT} from '../../auth0/api_config';
 
 function Navbar(props) {
     const [user, setUser] = useState({
@@ -8,16 +10,25 @@ function Navbar(props) {
         image : null
     })
     useEffect(()=>{
-    getProfile((err, user) => {
-       if (err) {
-         console.error(err);
-       } else {
-         setUser({
-           name: user.given_name,
-           image: user.picture
-         })
-       }
-     })
+      (async () => {
+        let res = await get(`${API_ROOT}user_info`);
+        if (res) {
+          setUser({
+            name : res.name,
+            image : res.profile_picture
+          })
+        }
+      })();
+    // getProfile((err, user) => {
+    //    if (err) {
+    //      console.error(err);
+    //    } else {
+    //      setUser({
+    //        name: user.given_name,
+    //        image: user.picture
+    //      })
+    //    }
+    //  })
     },[])
     return(
         <nav className="navbar cursor-default nbar navbar-light d-flex">
