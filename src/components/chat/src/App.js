@@ -1,21 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Chat.css";
 import { ReactComponent as Down } from "./down.svg";
-import * as firebase from "firebase";
-import {getProfile} from "../../../auth0/auth0";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyD2KCjdds6S99QiRIlMWd4pfv8n14vhbvM",
-  authDomain: "deduce-chat.firebaseapp.com",
-  databaseURL: "https://deduce-chat.firebaseio.com",
-  projectId: "deduce-chat",
-  storageBucket: "deduce-chat.appspot.com",
-  messagingSenderId: "1097746995795",
-  appId: "1:1097746995795:web:65419f51731006db8584a6",
-  measurementId: "G-KV6BJD90PY",
-};
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
+import { getProfile } from "../../../auth0/auth0";
+import db from "../../firebase";
 
 const Chat = ({ name, email }) => {
   const [msg, setMsg] = useState("");
@@ -26,8 +13,7 @@ const Chat = ({ name, email }) => {
   const messagesEndRef = useRef(null);
   const messagesDivRef = useRef(null);
 
-  const [profile,setProfile] = useState({});
-
+  const [profile, setProfile] = useState({});
 
   function scrolledToBottom(el) {
     return el.scrollHeight - el.scrollTop - el.clientHeight === 0;
@@ -38,19 +24,18 @@ const Chat = ({ name, email }) => {
     }
   };
 
-
-  useEffect(()=>{
+  useEffect(() => {
     getProfile((err, user) => {
       if (err) {
         console.error(err);
       } else {
         setProfile({
           name: user.given_name,
-          email: user.email
-        })
+          email: user.email,
+        });
       }
-    })
-  },[]);
+    });
+  }, []);
 
   useEffect(scrollToBottom, [messages]);
   useEffect(scrollToBottom, []);
@@ -59,10 +44,10 @@ const Chat = ({ name, email }) => {
       if (data.val()) {
         const size = parseInt(window.localStorage.getItem("size"));
         let msgs = JSON.parse(window.localStorage.getItem("messages")) || [];
-        if(msgs.length) {
+        if (msgs.length) {
           if (
-              data.val().timestamp === msgs[msgs.length - 1 || 0].timestamp &&
-              data.val().email === msgs[msgs.length - 1].email
+            data.val().timestamp === msgs[msgs.length - 1 || 0].timestamp &&
+            data.val().email === msgs[msgs.length - 1].email
           ) {
             msgs = msgs.slice(0, msgs.length - 1);
             console.log(msgs);
@@ -72,8 +57,8 @@ const Chat = ({ name, email }) => {
           window.localStorage.setItem("size", JSON.stringify(size + 1));
           window.localStorage.setItem("last", data.val().timestamp);
           window.localStorage.setItem(
-              "messages",
-              JSON.stringify([...msgs, data.val()])
+            "messages",
+            JSON.stringify([...msgs, data.val()])
           );
           setMessages((old) => {
             return [...msgs, data.val()];
@@ -82,12 +67,12 @@ const Chat = ({ name, email }) => {
           window.localStorage.setItem("last", data.val().timestamp);
           const newMessages = msgs.slice(msgs.length / 2);
           window.localStorage.setItem(
-              "size",
-              JSON.stringify(newMessages.length + 1)
+            "size",
+            JSON.stringify(newMessages.length + 1)
           );
           window.localStorage.setItem(
-              "messages",
-              JSON.stringify([...newMessages, data.val()])
+            "messages",
+            JSON.stringify([...newMessages, data.val()])
           );
           setMessages((old) => {
             return [...newMessages, data.val()];
@@ -98,38 +83,37 @@ const Chat = ({ name, email }) => {
     const size = window.localStorage.getItem("size");
     const cacheClearances = window.localStorage.getItem("cacheClearances");
     db.ref()
-        .child("blast-local")
-        .once("value", (data) => {
+      .child("blast-local")
+      .once("value", (data) => {
+        console.log(cacheClearances);
+        if (
+          cacheClearances === null ||
+          data.val() > parseInt(cacheClearances)
+        ) {
           console.log(cacheClearances);
-          if (
-              cacheClearances === null ||
-              data.val() > parseInt(cacheClearances)
-          ) {
-            console.log(cacheClearances);
-            window.localStorage.removeItem("size");
-            window.localStorage.removeItem("last");
-            window.localStorage.removeItem("messages");
-            window.localStorage.setItem(
-                "cacheClearances",
-                JSON.stringify(data.val())
-            );
-          }
-        });
+          window.localStorage.removeItem("size");
+          window.localStorage.removeItem("last");
+          window.localStorage.removeItem("messages");
+          window.localStorage.setItem(
+            "cacheClearances",
+            JSON.stringify(data.val())
+          );
+        }
+      });
     if (size === 0 || size === null) {
       chatRoom.endAt().limitToLast(100).on("child_added", handleNewMessages);
     } else {
       setMessages(JSON.parse(window.localStorage.getItem("messages")));
       chatRoom
-          .orderByChild("timestamp")
-          .startAt(parseInt(window.localStorage.getItem("last")))
-          .on("child_added", handleNewMessages);
+        .orderByChild("timestamp")
+        .startAt(parseInt(window.localStorage.getItem("last")))
+        .on("child_added", handleNewMessages);
     }
     return () => {
       chatRoom.off("child_added", handleNewMessages);
     };
     // eslint-disable-next-line
   }, []);
-
 
   const handleMsgChange = (e) => setMsg(e.target.value);
   const handleKeyDown = (e) => {
