@@ -8,6 +8,7 @@ import Answer from "../answer/Answer";
 import Imagebox from "./Imagebox/Imagebox";
 import { get } from "../../auth0/http";
 import { API_ROOT } from "../../auth0/api_config";
+import db from "../firebase";
 import "./Main.scss";
 
 function Main(props) {
@@ -64,28 +65,29 @@ function Main(props) {
       }
     })();
 
-    // Check if someone unlocked the level this user is currently on every 60 seconds
-    let interval = setInterval(() => {
-      let currLevel = localStorage.getItem("level_number");
-      if (currLevel !== "undefined" || currLevel != null) {
-        (async () => {
-          let res = await get(`${API_ROOT}current_level`);
-          if (res.level_number > currLevel) {
+    const curr_lev_ref = db.ref().child("current_level");
+    curr_lev_ref.on("value", (data) => {
+      if (data.val()) {
+        let currLevel = localStorage.getItem("level_number");
+        if (currLevel !== "undefined" && currLevel != null) {
+          if (data.val() !== currLevel) {
+            localStorage.setItem("level_number", data.val());
             // alert("Someone already solved this level!");
             // Give some better visual feedback to user and reload page after a small delay to get new level
           }
-        })();
+        }
       }
-    }, 60000);
-
-    return () => clearInterval(interval);
+    });
+    return () => curr_lev_ref.off("value");
   }, []);
 
   return (
-    <div id="main" className="cursor-default">
-      {level.cover_image && <div className="cover-image">
+    <div id="main">
+      {level.cover_image && (
+        <div className="cover-image">
           <img className="cover-clue" src={level.cover_image} alt="" />
-      </div>}
+        </div>
+      )}
       <div
         className={`door-btn cursor-pointer ${isBoard ? "toggle-chat" : ""}`}
         onClick={() => board()}
@@ -112,14 +114,26 @@ function Main(props) {
       {isAnswer && <Answer toggle={answer} />}
 
       <div className="mascot-hint">
-        {(!anime && level.hints) && <div>
-          {isBubble ? 
-          (<div onClick={() => setBubble(false)} className="bubble cursor-pointer">
-            {level.hints.map((x, i) => <p key={i}>{x.hint}</p>)}
-          </div>):
-          <FontAwesomeIcon onClick={() => setBubble(true)} className="bulb cursor-pointer" 
-          icon={faLightbulb} />}
-        </div>}
+        {!anime && level.hints && (
+          <div>
+            {isBubble ? (
+              <div
+                onClick={() => setBubble(false)}
+                className="bubble cursor-pointer"
+              >
+                {level.hints.map((x, i) => (
+                  <p key={i}>{x.hint}</p>
+                ))}
+              </div>
+            ) : (
+              <FontAwesomeIcon
+                onClick={() => setBubble(true)}
+                className="bulb cursor-pointer"
+                icon={faLightbulb}
+              />
+            )}
+          </div>
+        )}
         <img
           src={require("../../assets/images/mascot.png")}
           alt=""
