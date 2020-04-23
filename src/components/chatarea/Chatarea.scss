@@ -1,7 +1,7 @@
 @import '../../super.scss';
 
 #chat-area{
-    width: 22%;
+    width: 30vw;
     background-color: $doorinfo-color;
     position: absolute;
     transition: all 0.5s;
@@ -12,14 +12,28 @@
         position: absolute;
         font-size: 5vh;
         color: white;
-        top: 0%;
+        top: 10%;
         left: 90%;
     }
 }
-.cha{
-    height: 6vh;
-    overflow: hidden;
+@media only screen and (max-width: 1000px) {
+    .cha{
+        height: 4.6vw;
+        overflow: hidden;
+    }
+
 }
+
+@media only screen and (min-width: 1000px) {
+    .cha{
+        height: 2.9vw;
+        overflow: hidden;
+    }
+
+}
+
+
+
 .cha-tra{
     height: 90vh;
     left: 0%;
