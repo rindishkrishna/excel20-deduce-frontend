@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faLightbulb } from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft, faLightbulb, faCompress } from "@fortawesome/free-solid-svg-icons";
 import Doorboard from "../doorboard/Doorboard";
 import Chatarea from "../chatarea/Chatarea";
 import Photo from "../photo/Photo";
@@ -83,6 +83,14 @@ function Main(props) {
 
   return (
     <div id="main">
+
+<div className="full-screen cursor-pointer"
+        onClick={() => {
+            document.documentElement.requestFullscreen();
+        }}>
+        <FontAwesomeIcon icon={faCompress} />
+      </div>
+
       {level.cover_image && (
         <div className="cover-image">
           <img className="cover-clue" src={level.cover_image} alt="" />
@@ -113,39 +121,39 @@ function Main(props) {
       {isPhoto.state && <Photo toggle={photo} link={isPhoto.image} />}
       {isAnswer && <Answer toggle={answer} />}
 
-      <div className="mascot-hint">
-        {!anime && level.hints && (
-          <div>
-            {isBubble ? (
-              <div
-                onClick={() => setBubble(false)}
-                className="bubble cursor-pointer"
-              >
-                {level.hints.map((x, i) => (
-                  <p key={i}>{x.hint}</p>
-                ))}
-              </div>
-            ) : (
-              <FontAwesomeIcon
-                onClick={() => setBubble(true)}
-                className="bulb cursor-pointer"
-                icon={faLightbulb}
-              />
-            )}
-          </div>
-        )}
-        <img
-          src={require("../../assets/images/mascot.png")}
-          alt=""
-          id="mascot"
-          className={`cursor-pointer ${anime ? "mascot" : ""}`}
-          onClick={() => setAnime(true)}
-          onAnimationEnd={() => setAnime(false)}
-        />
-      </div>
 
       <div className="contain">
         <div id="wall">
+          <div className="mascot-hint">
+            {!anime && level.hints && (
+              <div>
+                {isBubble ? (
+                  <div
+                    onClick={() => setBubble(false)}
+                    className="bubble cursor-pointer"
+                  >
+                    {level.hints.map((x, i) => (
+                      <p key={i}>{x.hint}</p>
+                    ))}
+                  </div>
+                ) : (
+                  <FontAwesomeIcon
+                    onClick={() => setBubble(true)}
+                    className="bulb cursor-pointer"
+                    icon={faLightbulb}
+                  />
+                )}
+              </div>
+            )}
+            <img
+              src={require("../../assets/images/mascot.png")}
+              alt=""
+              id="mascot"
+              className={`cursor-pointer ${anime ? "mascot" : ""}`}
+              onClick={() => setAnime(true)}
+              onAnimationEnd={() => setAnime(false)}
+            />
+          </div>
           {level.level_file_1 && (
             <Imagebox photo={photo} image={level.level_file_1} />
           )}
