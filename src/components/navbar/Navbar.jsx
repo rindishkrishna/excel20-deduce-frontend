@@ -8,7 +8,7 @@ function Navbar(props) {
     const [user, setUser] = useState({
         name : null,
         image : null
-    })
+    });
     useEffect(()=>{
       (async () => {
         let res = await get(`${API_ROOT}user_info`);

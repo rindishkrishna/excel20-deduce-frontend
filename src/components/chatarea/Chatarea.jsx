@@ -16,7 +16,7 @@ function Chatarea(props) {
           className={`toggle-3 cursor-pointer ${props.cha ? "togg-tra" : "rotate-180 "}`}
           icon={faAngleDown}
         />
-        <h6 style={{fontSize:'2.2vh'}} className="text-center grey-3 pt-2 pb-1">DISCUSSION BOARD</h6>
+        <h6 id={"chat-heading"} className="text-center grey-3 pt-2 pb-1">DISCUSSION BOARD</h6>
       </div>
       <Chat name={props.name} email={props.email} />
     </div>
