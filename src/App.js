@@ -6,6 +6,7 @@ import { Router, Route, Switch, Redirect } from "react-router-dom";
 import ContextProvider from "./context/context";
 import Navbar from "./components/navbar/Navbar";
 import Main from "./components/main/Main";
+import Alertbox from "./components/alertbox/Alertbox";
 import history from "./utils/history";
 import Reload from "./components/reload/Reload";
 import {checkAuth} from "./auth0/http";
@@ -23,6 +24,7 @@ function App() {
   return (
     <ContextProvider>
       <Router history={history}>
+        <Alertbox />
         <Switch>
           <Route exact path="/game" render={() => (
             checkAuth() ? 
