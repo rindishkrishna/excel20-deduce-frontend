@@ -28,6 +28,19 @@
         z-index: 2;
         right: 0%;
     }
+    .refresh-screen{
+        position: fixed;
+        background-color: white;
+        border-radius: 5px;
+        text-align: center;
+        font-size: 4.9vh;
+        opacity: 0.5;
+        width: 7vh;
+        height: 7vh;
+        top: 10vh;
+        z-index: 2;
+        right: 0%;
+    }
     .door-btn{
         position: absolute;
         right: 0%;

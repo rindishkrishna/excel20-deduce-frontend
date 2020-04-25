@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faLightbulb, faCompress } from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft, faLightbulb, faCompress ,faRedo  } from "@fortawesome/free-solid-svg-icons";
 import Doorboard from "../doorboard/Doorboard";
 import Chatarea from "../chatarea/Chatarea";
 import Photo from "../photo/Photo";
@@ -84,6 +84,13 @@ function Main(props) {
 
   return (
     <div id="main">
+
+      <div className="refresh-screen cursor-pointer"
+           onClick={() => {
+             window.location.reload();
+           }}>
+        <FontAwesomeIcon icon={faRedo} />
+      </div>
 
 <div className="full-screen cursor-pointer"
         onClick={() => {
