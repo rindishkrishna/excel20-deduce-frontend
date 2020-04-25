@@ -8,6 +8,7 @@ import Navbar from "./components/navbar/Navbar";
 import Main from "./components/main/Main";
 import history from "./utils/history";
 import Reload from "./components/reload/Reload";
+import {checkAuth} from "./auth0/http";
 import { login, handleAuthentication} from "./auth0/auth0";
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
       <Router history={history}>
         <Switch>
           <Route exact path="/game" render={() => (
-            localStorage.getItem("access_token_auth0") ? 
+            checkAuth() ? 
             (
                 screen ?
                 (<React.Fragment>

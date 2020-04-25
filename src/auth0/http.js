@@ -1,6 +1,6 @@
 import { login } from "./auth0"
 
-const checkAuth = () => {
+export const checkAuth = () => {
     // Get access and refresh tokens
     let at = localStorage.getItem("access_token");
     let rt = localStorage.getItem("refresh_token");
