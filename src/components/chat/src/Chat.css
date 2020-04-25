@@ -4,10 +4,10 @@ div {
 
 @media only screen and (max-width: 1000px) {
   #chat-heading{
-    font-size: 1.8vw;
+    font-size: 1.6vw;
   }
   .chatApp {
-    font-size: 1.5vw;
+    font-size: 1.3vw;
   }
 }
 
@@ -96,7 +96,7 @@ div {
 .message {
   align-self: flex-start;
   position: relative;
-  padding: 5px 10px;
+  padding: 0 10px 2px 8px;
   background-color: #434343;
   border-radius: 5px;
   max-width: 80%;
@@ -121,7 +121,7 @@ div {
   background-color: #434343;
   align-self: flex-end;
   position: relative;
-  padding: 5px 10px;
+  padding: 5px 1px 0 5px;
   border-radius: 5px;
   max-width: 80%;
   margin: 5px 15px;
@@ -149,7 +149,7 @@ div {
 #sender {
   color: #d32f2f;
   font-weight: 500;
-  font-size: 0.9em;
+  font-size: 0.8em;
 }
 
 .msg-text {
@@ -227,8 +227,8 @@ div {
 
 .msg-icon{
   color: #dedede;
-  right: 2vw;
+  right: 2.5vw;
   top:auto;
-  bottom: 1.45em;
+  bottom: 1.55em;
   position: absolute;
 }

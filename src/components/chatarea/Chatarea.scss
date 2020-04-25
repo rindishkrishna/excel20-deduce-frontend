@@ -3,7 +3,7 @@
 #chat-area{
     width: 30vw;
     background-color: $doorinfo-color;
-    position: absolute;
+    position: fixed;
     transition: all 0.5s;
     z-index: 100;
     left: 0%;
