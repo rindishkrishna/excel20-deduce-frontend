@@ -118,7 +118,7 @@ const Chat = ({ name, email }) => {
 
   const handleMsgChange = (e) => setMsg(e.target.value);
   const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && msg !== "") {
       chatRoom.push({
         sender: profile.name || "",
         email: profile.email || "",
@@ -130,13 +130,15 @@ const Chat = ({ name, email }) => {
   };
 
   const handleClick = (e) => {
-    chatRoom.push({
-      sender: profile.name || "",
-      email: profile.email || "",
-      msg,
-      timestamp: Date.now(),
-    });
-    setMsg("");
+    if (msg !== "") {
+      chatRoom.push({
+        sender: profile.name || "",
+        email: profile.email || "",
+        msg,
+        timestamp: Date.now(),
+      });
+      setMsg("");
+    }
   };
 
   return (
