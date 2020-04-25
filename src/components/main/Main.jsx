@@ -6,6 +6,7 @@ import Chatarea from "../chatarea/Chatarea";
 import Photo from "../photo/Photo";
 import Answer from "../answer/Answer";
 import Imagebox from "./Imagebox/Imagebox";
+import Notice from "../notice/Notice";
 import { get } from "../../auth0/http";
 import { API_ROOT } from "../../auth0/api_config";
 import db from "../firebase";
@@ -120,6 +121,7 @@ function Main(props) {
       <Doorboard toggle={board} bor={isBoard} />
       {isPhoto.state && <Photo toggle={photo} link={isPhoto.image} />}
       {isAnswer && <Answer toggle={answer} />}
+      {isNotice && <Notice toggle={notice} question={level.question} />}
 
 
       <div className="contain">
@@ -159,9 +161,7 @@ function Main(props) {
           )}
           {level.question && (
             <div
-              className={`graf cursor-pointer text-center ${
-                isNotice ? "big-n" : ""
-              }`}
+              className={`graf cursor-pointer text-center`}
               onClick={() => notice()}
             >
               <div className="p">
