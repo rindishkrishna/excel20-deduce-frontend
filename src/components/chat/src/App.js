@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Chat.css";
 import { ReactComponent as Down } from "./down.svg";
-import { getProfile } from "../../../auth0/auth0";
 import db from "../../firebase";
-import {get} from "../../../auth0/http";
-import {API_ROOT} from "../../../auth0/api_config";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPaperPlane} from "@fortawesome/free-solid-svg-icons";
+import { get } from "../../../auth0/http";
+import { API_ROOT } from "../../../auth0/api_config";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 const Chat = ({ name, email }) => {
   const [msg, setMsg] = useState("");
@@ -28,32 +27,16 @@ const Chat = ({ name, email }) => {
     }
   };
 
-  useEffect(() =>{
-      get(`${API_ROOT}user_info`).then(
-          res => {
-            if (res) {
-              setProfile({
-                name : res.name,
-                email : res.email
-              })
-            }
-          }
-      );
-
-    },[]);
-
-  // useEffect(() => {
-  //   getProfile((err, user) => {
-  //     if (err) {
-  //       console.error(err);
-  //     } else {
-  //       setProfile({
-  //         name: user.given_name,
-  //         email: user.email,
-  //       });
-  //     }
-  //   });
-  // }, []);
+  useEffect(() => {
+    get(`${API_ROOT}user_info`).then((res) => {
+      if (res) {
+        setProfile({
+          name: res.name,
+          email: res.email,
+        });
+      }
+    });
+  }, []);
 
   useEffect(scrollToBottom, [messages]);
   useEffect(scrollToBottom, []);
@@ -135,7 +118,7 @@ const Chat = ({ name, email }) => {
 
   const handleMsgChange = (e) => setMsg(e.target.value);
   const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && msg !== "") {
       chatRoom.push({
         sender: profile.name || "",
         email: profile.email || "",
@@ -147,6 +130,7 @@ const Chat = ({ name, email }) => {
   };
 
   const handleClick = (e) => {
+    if (msg !== "") {
       chatRoom.push({
         sender: profile.name || "",
         email: profile.email || "",
@@ -154,6 +138,7 @@ const Chat = ({ name, email }) => {
         timestamp: Date.now(),
       });
       setMsg("");
+    }
   };
 
   return (
@@ -171,11 +156,12 @@ const Chat = ({ name, email }) => {
             }
           }}
           onTouchMove={(e) => {
-            // if (elementInViewport(messagesEndRef.current)) {
-            //   setScrolled(false);
-            // } else {
-            //   setScrolled(true);
-            // }
+            console.log(scrolledToBottom(messagesDivRef.current));
+            if (scrolledToBottom(messagesDivRef.current)) {
+              setScrolled(false);
+            } else {
+              setScrolled(true);
+            }
           }}
         >
           {messages.map((message) => {
@@ -218,9 +204,9 @@ const Chat = ({ name, email }) => {
             value={msg}
           />
           <FontAwesomeIcon
-              onClick={handleClick}
-              className={"msg-icon"}
-              icon={faPaperPlane}
+            onClick={handleClick}
+            className={"msg-icon"}
+            icon={faPaperPlane}
           />
         </div>
       </div>
