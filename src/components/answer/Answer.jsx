@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+import {Context} from "../../context/context";
 import { post } from "../../auth0/http";
 import { API_ROOT } from "../../auth0/api_config";
 import "./Answer.scss";
 
 function Answer(props) {
+
+  const cont = useContext(Context);
+
   const [text, setText] = useState("");
   const click = () => {
     (async () => {
@@ -18,9 +22,9 @@ function Answer(props) {
           level_number: level_number,
         });
         if (!res.correct_answer) {
-          alert("Wrong answer!");
+          cont.Alert("Wrong answer!");
         } else {
-          alert("Correct answer!");
+          cont.Alert("Correct answer!");
           setTimeout(() => window.location.reload(), 2000);
         }
       }
