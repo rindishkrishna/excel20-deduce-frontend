@@ -20,7 +20,7 @@ function Main(props) {
     level_file_3: null,
     cover_image: null,
     question: null,
-    hints: null,
+    hints: [],
   });
   const [isBoard, setBoard] = useState(false);
   const [isBubble, setBubble] = useState(false);
@@ -31,7 +31,7 @@ function Main(props) {
   const [isNotice, setNotice] = useState(false);
   const [isAnswer, setAnswer] = useState(false);
   const [isChat, setChat] = useState(false);
-  const [anime, setAnime] = useState(false);
+  //const [anime, setAnime] = useState(false);
 
   const notice = () => {
     if (!isAnswer && !isPhoto.state) {
@@ -134,7 +134,7 @@ function Main(props) {
       <div className="contain">
         <div id="wall">
           <div className="mascot-hint">
-            {!anime && level.hints && (
+            {level.hints.length > 0 && (
               <div>
                 {isBubble ? (
                   <div
@@ -155,12 +155,12 @@ function Main(props) {
               </div>
             )}
             <img
-              src={require("../../assets/images/mascot.png")}
+              src={require("../../assets/images/man.png")}
               alt=""
               id="mascot"
-              className={`cursor-pointer ${anime ? "mascot" : ""}`}
-              onClick={() => setAnime(true)}
-              onAnimationEnd={() => setAnime(false)}
+              //className={`${anime ? "mascot" : ""}`}
+              //onClick={() => setAnime(true)}
+              //onAnimationEnd={() => setAnime(false)}
             />
           </div>
           {level.level_file_1 && (
