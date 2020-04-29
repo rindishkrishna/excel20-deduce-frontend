@@ -59,12 +59,21 @@ $grey_shade : rgba(100,100,100,1);
             }
         }
         .img-cont{
-            width: 25%;
+            width: 30%;
             .winner-img{
                 height: 8vh;
                 border-radius: 50%;
             }
+            .name{
+                font-size: 1.6vh;
+                text-align: center;
+                margin: 0px;
+            }
         }
+    }
+    .current-door{
+        background-image: linear-gradient(to right,$grey_shade, $grey_0,$grey_0, $grey_0);
+        color:#fefefe;
     }
     .door-info:hover{
         background-image: linear-gradient(to right,$grey_shade, $grey_0,$grey_0, $grey_0);
