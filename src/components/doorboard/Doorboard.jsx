@@ -1,12 +1,15 @@
 import './Doorboard.scss';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import Doorinfo from './doorinfo/Doorinfo';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faAngleRight} from '@fortawesome/free-solid-svg-icons';
 import {API_ROOT} from '../../auth0/api_config';
 import {get} from '../../auth0/http';
+import {Context} from '../../context/context';
 
 function Doorboard(props) {
+
+    const cont = useContext(Context);
 
     const info = [{
         level_number : 21,
@@ -120,7 +123,9 @@ function Doorboard(props) {
         setDoor(doorInfo => {
             return doorInfo.map(x=>{
                 if(x.level_number === parseInt(currLevel)){
-                    x.current = true
+                    x.current = true;
+                }else{
+                    x.current = false;
                 }
                 return x;
             })
@@ -139,7 +144,7 @@ function Doorboard(props) {
                 });
             });
         })();
-    }, []);
+    }, [cont]);
 
     return(
         <div id="door-board" className={`bor cursor-default ${props.bor ? "bor-tra" : ""}`}>
