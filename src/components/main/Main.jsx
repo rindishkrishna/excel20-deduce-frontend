@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faLightbulb, faCompress ,faRedo  } from "@fortawesome/free-solid-svg-icons";
 import Doorboard from "../doorboard/Doorboard";
@@ -9,10 +9,13 @@ import Imagebox from "./Imagebox/Imagebox";
 import Notice from "../notice/Notice";
 import { get } from "../../auth0/http";
 import { API_ROOT } from "../../auth0/api_config";
+import {Context} from '../../context/context';
 import db from "../firebase";
 import "./Main.scss";
 
 function Main(props) {
+
+  const cont = useContext(Context);
   const [level, setLevel] = useState({
     level_number: null,
     level_file_1: null,
@@ -71,16 +74,17 @@ function Main(props) {
       if (data.val()) {
         let currLevel = localStorage.getItem("level_number");
         if (currLevel !== "undefined" && currLevel != null) {
-          if (data.val() !== currLevel) {
+          if (data.val() !== parseInt(currLevel)) {
             localStorage.setItem("level_number", data.val());
-            // alert("Someone already solved this level!");
+            cont.Alert("Someone already solved this level!");
+            //cont.Alert("Someone already solved this level!", 3000); //for reloading after 3s.
             // Give some better visual feedback to user and reload page after a small delay to get new level
           }
         }
       }
     });
     return () => curr_lev_ref.off("value");
-  }, []);
+  }, [cont]);
 
   return (
     <div id="main">
