@@ -4,7 +4,7 @@ import {faDoorOpen, faDoorClosed} from '@fortawesome/free-solid-svg-icons';
 
 function Doorinfo(props) {
     return(
-        <div className={`d-flex door-info pr-1 justify-content grey-3 ${props.current ? "current-door" : ""}`}>
+        <div ref={props.refer} className={`d-flex door-info pr-1 justify-content grey-3 ${props.current ? "current-door" : ""}`}>
             <FontAwesomeIcon icon={props.isOpen ? faDoorOpen : faDoorClosed} className="door mr-2" />
             <div className="info">
                 <p className={`door-name tex ${props.bor ? "tex-tra" : ""}`}>Door {props.door}</p>

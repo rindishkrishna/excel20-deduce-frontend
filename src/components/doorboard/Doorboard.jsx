@@ -1,5 +1,5 @@
 import './Doorboard.scss';
-import React, {useEffect, useState, useContext} from 'react';
+import React, {useEffect, useState, useContext, useRef} from 'react';
 import Doorinfo from './doorinfo/Doorinfo';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faAngleRight} from '@fortawesome/free-solid-svg-icons';
@@ -10,6 +10,7 @@ import {Context} from '../../context/context';
 function Doorboard(props) {
 
     const cont = useContext(Context);
+
 
     const info = [{
         level_number : 21,
@@ -118,6 +119,9 @@ function Doorboard(props) {
         point : 300
     }]
     const [doorInfo, setDoor] = useState(info); 
+    const mainDiv = useRef();
+    const subDiv = useRef();
+   
     useEffect(()=>{
         let currLevel = localStorage.getItem("level_number");
         setDoor(doorInfo => {
@@ -146,12 +150,28 @@ function Doorboard(props) {
         })();
     }, [cont]);
 
+    useEffect(()=>{
+        if(props.bor){
+            if(subDiv.current){
+                mainDiv.current.scrollTo({
+                    top: subDiv.current.offsetTop,
+                    behavior: 'smooth',
+                  });
+            }
+        }
+    }, [props.bor])
+
     return(
-        <div id="door-board" className={`bor cursor-default ${props.bor ? "bor-tra" : ""}`}>
+        <div ref={mainDiv} id="door-board" className={`bor cursor-default ${props.bor ? "bor-tra" : ""}`}>
             <div className={`toggle-2 cursor-pointer ${props.bor ? "togg-tra" : ""}`} onClick={() => props.toggle()}>
-                <FontAwesomeIcon onClick={() => props.toggle()} icon = {faAngleRight} />
+                <FontAwesomeIcon icon = {faAngleRight} />
             </div>
             {doorInfo.map(x => {
+                if(x.current){
+                    return(
+                        <Doorinfo refer={subDiv} key={x.level_number} isOpen={x.unlocked_by} door={x.level_number} point={x.point} current={x.current} bor={props.bor} />
+                    )
+                }
                 return (
                     <Doorinfo key={x.level_number} isOpen={x.unlocked_by} door={x.level_number} point={x.point} current={x.current} bor={props.bor} />
                 )
