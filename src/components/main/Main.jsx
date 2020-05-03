@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faLightbulb, faCompress ,faRedo  } from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft, faLightbulb, faCompress ,faRedo, faArrowsAlt  } from "@fortawesome/free-solid-svg-icons";
 import Doorboard from "../doorboard/Doorboard";
 import Chatarea from "../chatarea/Chatarea";
 import Photo from "../photo/Photo";
@@ -34,6 +34,7 @@ function Main(props) {
   const [isNotice, setNotice] = useState(false);
   const [isAnswer, setAnswer] = useState(false);
   const [isChat, setChat] = useState(false);
+  const [isFull, setFull] = useState(false);
   //const [anime, setAnime] = useState(false);
 
   const notice = () => {
@@ -69,6 +70,14 @@ function Main(props) {
       }
     })();
 
+    window.addEventListener('resize', () => {
+      if(document.fullscreen){
+       setFull(true);
+      }else{
+        setFull(false);
+      }
+    });
+
     const curr_lev_ref = db.ref().child("current_level");
     curr_lev_ref.on("value", (data) => {
       if (data.val()) {
@@ -96,12 +105,21 @@ function Main(props) {
         <FontAwesomeIcon icon={faRedo} />
       </div>
 
-<div className="full-screen cursor-pointer"
-        onClick={() => {
-            document.documentElement.requestFullscreen();
-        }}>
-        <FontAwesomeIcon icon={faCompress} />
-      </div>
+      {isFull ? (
+        <div className="full-screen cursor-pointer"
+          onClick={() => {
+              document.exitFullscreen();
+          }}>
+          <FontAwesomeIcon icon={faCompress} />
+        </div>
+      ) : (
+        <div className="full-screen cursor-pointer"
+          onClick={() => {
+              document.documentElement.requestFullscreen();
+          }}>
+          <FontAwesomeIcon className="point" icon={faArrowsAlt} />
+        </div>
+      )}
 
       {level.cover_image && (
         <div className="cover-image">
