@@ -1,5 +1,9 @@
 @import '../../super.scss';
 
+body{
+    overflow: hidden;
+}
+
 #main{
     height: 90vh;
     width: 100%;

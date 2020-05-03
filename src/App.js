@@ -11,6 +11,7 @@ import history from "./utils/history";
 import Reload from "./components/reload/Reload";
 import {checkAuth} from "./auth0/http";
 import { login, handleAuthentication} from "./auth0/auth0";
+import Landing from "./components/Landing/Landing";
 
 function App() {
   const [screen, setScreen] = useState(true);
@@ -23,23 +24,24 @@ function App() {
 
   return (
     <ContextProvider>
+        <Reload screen={screen} setScreen={setScreen}/>
       <Router history={history}>
         <Alertbox />
         <Switch>
           <Route exact path="/game" render={() => (
             checkAuth() ? 
             (
-                screen ?
+
                 (<React.Fragment>
                   <Navbar score={30} />
                   <Main />
-                </React.Fragment>) :
-                (<Reload screen={setScreen} />)
+                </React.Fragment>)
             ):
             (<Redirect to="/login" />)
           )} />
           <Route exact path="/login" render={() => login()} />
-          <Route
+            <Route exact path="" render={Landing} />
+            <Route
             exact
             path="/login/callback"
             render={() => handleAuthentication()}
