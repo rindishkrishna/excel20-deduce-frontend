@@ -15,11 +15,14 @@
         font-weight: bold;
         margin-top: 1vh;
     }
-    .logo{
-        height: 5vh;
-    }
     .prof-img{
         border-radius: 50%;
         height: 6vh;
     }
+}
+
+.logo{
+    top:-5vh;
+    position: absolute;
+    height: 20vh;
 }

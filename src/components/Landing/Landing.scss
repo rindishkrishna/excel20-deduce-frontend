@@ -1,0 +1,127 @@
+$primary : #4dc6e4;
+
+
+//$primary : #ed0b0e;
+$secondary : #242424;
+
+//$primary : #242424;
+//$secondary : #ed0b0e;
+
+*{
+  box-sizing: border-box;
+}
+
+.cover{
+  height: 100vh;
+  width: 100vw;
+  background-color: $primary;
+  position: relative;
+  overflow: hidden;
+  background-image: url("../../assets/images/background.png");
+  background-size: cover;
+}
+
+
+
+.triangle-black{
+  background-color: $secondary;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  clip-path: polygon(0 0, 100% 0 , 100% 30% , 0 100%);
+}
+
+.button-red{
+  height: 4vw;
+  width: 19vw;
+  position: absolute;
+  left: 30%;
+  bottom: 12.5%;
+  border-radius: 30px;
+  border: 0.4vw solid $primary;
+  background-color: $secondary ;
+  transform: translate(-50%,-50%);
+  display: flex;
+  justify-content: center;
+}
+
+.button-text{
+  font-weight: bold;
+  color: $primary;
+  letter-spacing: 0.2vw;
+  font-size: 1.5vw;
+  text-align: center;
+  align-self: center;
+}
+
+.character img{
+  height: 40vw;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+}
+
+.box{
+  background-image: url("../../assets/images/BOX.png");
+  height: 80vh;
+  display: flex;
+  box-sizing: border-box;
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  top: 10vh;
+  bottom: auto;
+  margin-left: 3vw;
+}
+
+.green-button{
+  transition: 0.2s;
+  height: 4vw;
+  width: 10vw;
+  background-color: #689f38;
+  color: white;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 3vw;
+  position: absolute;
+  left: 40vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  transform: translate(-50%,-50%);
+  top: 65vh;
+  border-radius: 10vw;
+}
+
+.green-button div{
+  font-weight: 500;
+  color: white;
+  letter-spacing: 0.2vw;
+  font-size: 1.5vw;
+  text-align: center;
+  align-self: center;
+}
+
+.green-button:hover{
+  cursor: pointer;
+  background-color: white;
+
+  div{
+    color: #689f38;
+  }
+}
+
+.box-text{
+  left: 40vh ;
+  position: absolute;
+  align-self: flex-start;
+  transform: translate(-50%,-50%);
+  top: 55vh;
+  color: #689f38;
+  font-size: 1.5vw;
+  font-weight: 500;
+}
+
