@@ -10,7 +10,7 @@ import Alertbox from "./components/alertbox/Alertbox";
 import history from "./utils/history";
 import Reload from "./components/reload/Reload";
 import {checkAuth} from "./auth0/http";
-import { login, handleAuthentication} from "./auth0/auth0";
+import { login, handleAuthentication } from "./auth0/auth0";
 import Landing from "./components/Landing/Landing";
 
 function App() {
@@ -40,12 +40,12 @@ function App() {
             (<Redirect to="/login" />)
           )} />
           <Route exact path="/login" render={() => login()} />
-            <Route exact path="" render={Landing} />
             <Route
             exact
             path="/login/callback"
             render={() => handleAuthentication()}
           />
+          <Route exact path="" render={Landing} />
         </Switch>
       </Router>
     </ContextProvider>
