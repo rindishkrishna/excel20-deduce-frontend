@@ -123,6 +123,7 @@ div {
   position: relative;
   padding: 5px 1px 0 5px;
   border-radius: 5px;
+  min-width: 5%;
   max-width: 80%;
   margin: 5px 15px;
 }
@@ -226,9 +227,9 @@ div {
 }
 
 .msg-icon{
-  color: #dedede;
-  right: 2.5vw;
-  top:auto;
-  bottom: 1.55em;
   position: absolute;
+  color: #dedede;
+  top:50%;
+  right: calc(10px + 1.2vw);
+  transform: translate(0,-50%);
 }

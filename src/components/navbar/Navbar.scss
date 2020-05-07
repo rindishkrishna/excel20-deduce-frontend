@@ -5,15 +5,17 @@
     height: 10vh;
     color: white;
     .score{
-        margin-right: 3vw;
+        margin-right: 3vw!important;
     }
     .name{
-        margin-right: 2vw;
+        margin-right: 2vw!important;
     }
     .tex{
+        align-self: center;
+        text-align: center;
+        margin: 0;
         font-size: 3vh;
         font-weight: bold;
-        margin-top: 1vh;
     }
     .prof-img{
         border-radius: 50%;
@@ -25,4 +27,23 @@
     top:-5vh;
     position: absolute;
     height: 20vh;
+}
+
+.box-logout{
+    border-radius: 0!important;
+    background-color: #444!important;
+    color: white!important;
+}
+
+.box-logout a{
+    color: #cccccc!important;
+}
+
+.box-logout a:hover,.box-logout a:focus{
+    background-color: #212121!important;
+
+}
+
+.navbar{
+    padding: 0!important;
 }
