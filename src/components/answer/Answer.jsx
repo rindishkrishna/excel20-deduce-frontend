@@ -24,9 +24,9 @@ function Answer(props) {
         if (!res.correct_answer) {
           cont.Alert("Wrong answer!");
         } else {
+          cont.setIsSolve(true);
           cont.Alert("Correct answer!");
           props.toggle();
-          //setTimeout(() => window.location.reload(), 2000);
         }
       }
     })();

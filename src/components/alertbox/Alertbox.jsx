@@ -8,13 +8,12 @@ function Alertbox() {
         x.setAlert(true);
         x.setText("");
         let time = x.time;
-        if(x.time){
+        if(time){
             setTimeout(()=>{
                 x.setTime();
-                window.location.reload();
             }, time);
         }
-    }
+    };
     return(
         <div className={`alert-box ${x.isAlert ? "alert-out" : ""}`}>
             <div className="p cursor-default">
