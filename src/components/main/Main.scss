@@ -1,5 +1,14 @@
 @import '../../super.scss';
 
+:root:before {
+    content: url('../../assets/images/door-op.png');
+    /* partial fallback */
+    background-image: url('../../assets/images/door-op.png');
+    visibility: hidden;
+    position: absolute;
+    left: -999em;
+}
+
 body{
     overflow: hidden;
 }
@@ -123,6 +132,15 @@ body{
             margin-left: 5%;
             margin-bottom: -3vh;
         }
+        #mascot-op{
+            transition: 0.2s fade_in;
+            position: absolute;
+            bottom: 20%;
+            height: 75%;
+            left: 125%;
+            //top:70%;
+            z-index: 25;
+        }
         #mascot{
             position: absolute;
             bottom: 0%;
@@ -169,6 +187,16 @@ body{
         #door{
             grid-column: 2/3;
             height: 90vh;
+            .d-img-op {
+                background-image: url('../../assets/images/door-op.png');
+                background-size: 100% 100%;
+                position: relative;
+                transition: 2s ease-in-out;
+                top: 17.5%;
+                left: 18.3%;
+                width: 50.5%;
+                height: 60%;
+            }
             .d-img{
                 background-image: url('../../assets/images/door.png');
                 background-size: 100% 100%;

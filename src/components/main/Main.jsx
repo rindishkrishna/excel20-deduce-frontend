@@ -80,20 +80,22 @@ function Main(props) {
 
     const curr_lev_ref = db.ref().child("current_level");
     curr_lev_ref.on("value", (data) => {
+      console.log(data.val());
       if (data.val()) {
         let currLevel = localStorage.getItem("level_number");
+        console.log("cuuent levle",currLevel);
         if (currLevel !== "undefined" && currLevel != null) {
           if (data.val() !== parseInt(currLevel)) {
             localStorage.setItem("level_number", data.val());
-            cont.Alert("Someone already solved this level!");
-            //cont.Alert("Someone already solved this level!", 3000); //for reloading after 3s.
+              cont.Alert("Someone already solved this level!");
+            // cont.Alert("Someone already solved this level!", 3000); //for reloading after 3s.
             // Give some better visual feedback to user and reload page after a small delay to get new level
           }
         }
       }
     });
     return () => curr_lev_ref.off("value");
-  }, [cont]);
+  }, [cont.text,cont.isAlert]);
 
   return (
     <div id="main">
@@ -140,7 +142,6 @@ function Main(props) {
           chat <FontAwesomeIcon icon={faCommentDots} />
         </p>
       </div>*/}
-
       <Chatarea
         toggle={chat}
         cha={isChat}
@@ -151,12 +152,10 @@ function Main(props) {
       {isPhoto.state && <Photo toggle={photo} link={isPhoto.image} />}
       {isAnswer && <Answer toggle={answer} />}
       {isNotice && <Notice toggle={notice} question={level.question} />}
-
-
       <div className="contain">
         <div id="wall">
           <div className="mascot-hint">
-            {level.hints.length > 0 && (
+            {level.hint && level.hints.length > 0 && (
               <div>
                 {isBubble ? (
                   <div
@@ -179,7 +178,7 @@ function Main(props) {
             <img
               src={require("../../assets/images/man.png")}
               alt=""
-              id="mascot"
+              id={cont.isSolve? "mascot-op" : "mascot"}
               //className={`${anime ? "mascot" : ""}`}
               //onClick={() => setAnime(true)}
               //onAnimationEnd={() => setAnime(false)}
@@ -200,7 +199,7 @@ function Main(props) {
           )}
         </div>
         <div id="door">
-          <div className="d-img">
+          <div className={ cont.isSolve ? 'd-img-op' :"d-img"}>
             <div
               className="d-lock cursor-pointer"
               onClick={() => answer()}
