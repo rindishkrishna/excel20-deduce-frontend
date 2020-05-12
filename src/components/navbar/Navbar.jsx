@@ -18,7 +18,8 @@ function Navbar(props) {
         if (res) {
           setUser({
             name : res.name,
-            image : res.profile_picture
+            image : res.profile_picture, 
+              score: res.score
           })
         }
       })();
@@ -39,7 +40,7 @@ function Navbar(props) {
                 <img src={require('../../assets/images/logo.png')} className="d-inline-block align-top logo" alt="" />
             </a>
             <div id="user-info" className="d-flex">
-                <p className="score tex">MY SCORE : {props.score}</p>
+                <p className="score tex">My Score : <span style={{fontWeight:500}}>{user.score}</span></p>
                 <div className="d-flex">
                     <p className="name tex">{user.name}</p>
                     <div className="dropdown border-0">
