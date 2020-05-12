@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faLightbulb, faCompress ,faRedo, faArrowsAlt  } from "@fortawesome/free-solid-svg-icons";
 import Doorboard from "../doorboard/Doorboard";
 import Chatarea from "../chatarea/Chatarea";
+import Arrow from '../../assets/images/arrow.png'
 import Photo from "../photo/Photo";
 import Answer from "../answer/Answer";
 import Imagebox from "./Imagebox/Imagebox";
@@ -70,6 +71,8 @@ function Main(props) {
       }
     })();
 
+    console.log('say 1');
+
     window.addEventListener('resize', () => {
       if(document.fullscreen){
        setFull(true);
@@ -80,22 +83,30 @@ function Main(props) {
 
     const curr_lev_ref = db.ref().child("current_level");
     curr_lev_ref.on("value", (data) => {
-      console.log(data.val());
+      console.log('data val',data.val());
+      let k = data.val();
       if (data.val()) {
-        let currLevel = localStorage.getItem("level_number");
-        console.log("cuuent levle",currLevel);
-        if (currLevel !== "undefined" && currLevel != null) {
-          if (data.val() !== parseInt(currLevel)) {
-            localStorage.setItem("level_number", data.val());
+        setTimeout( () => {
+
+          let currLevel = parseInt(localStorage.getItem("level_number"));
+          console.log("cuuent levle", currLevel);
+          console.log('say 2');
+          if (currLevel !== undefined && currLevel !== null) {
+            if (k !== currLevel) {
+              localStorage.setItem("level_number", data.val());
               cont.Alert("Someone already solved this level!");
-            // cont.Alert("Someone already solved this level!", 3000); //for reloading after 3s.
-            // Give some better visual feedback to user and reload page after a small delay to get new level
+              // cont.Alert("Someone already solved this level!", 3000); //for reloading after 3s.
+              // Give some better visual feedback to user and reload page after a small delay to get new level
+            }
           }
         }
+        ,
+            2000
+      )
       }
     });
     return () => curr_lev_ref.off("value");
-  }, [cont.text,cont.isAlert]);
+  }, []);
 
   return (
     <div id="main">
@@ -200,10 +211,17 @@ function Main(props) {
         </div>
         <div id="door">
           <div className={ cont.isSolve ? 'd-img-op' :"d-img"}>
+            { cont.isSolve &&
+              <div className={"position-absolute arrow-img"}>
+                <img onClick={()=>window.location.reload()} src={Arrow} alt=""/>
+              </div>
+            }
             <div
               className="d-lock cursor-pointer"
               onClick={() => answer()}
-            ></div>
+            >
+
+            </div>
           </div>
         </div>
         <div id="photo" className="d-flex">

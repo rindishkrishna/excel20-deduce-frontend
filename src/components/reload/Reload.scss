@@ -14,6 +14,18 @@
     }
 }
 
+.rotate-phone{
+    height: 90px;
+    margin-bottom: 40px;
+    fill: #efefef;
+}
+
+.click-phone{
+    height: 50px;
+    margin-bottom: 40px;
+    fill: #efefef;
+}
+
 @media screen and (orientation: landscape){
     .rotate{
        display: none;
