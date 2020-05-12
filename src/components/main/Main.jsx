@@ -95,6 +95,7 @@ function Main(props) {
             if (k !== currLevel) {
               localStorage.setItem("level_number", data.val());
               cont.Alert("Someone already solved this level!");
+              window.location.reload()
               // cont.Alert("Someone already solved this level!", 3000); //for reloading after 3s.
               // Give some better visual feedback to user and reload page after a small delay to get new level
             }
