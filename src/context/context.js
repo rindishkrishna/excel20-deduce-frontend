@@ -16,7 +16,6 @@ function ContextProvider (props) {
             setTimeout(()=>{
                 setAlert(false);
                 setTime(y);
-                setIsSolve(false)
             },3000)
         }
         else {

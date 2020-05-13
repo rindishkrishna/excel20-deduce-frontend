@@ -286,3 +286,32 @@ body{
         color: goldenrod;
     }
 }
+
+@keyframes arrow{
+    0%{
+        transform: scale(.9) ;
+        color: goldenrod;
+    }
+    50%{
+        transform: scale(1);
+        color: gold;
+    }
+    100%{
+        transform: scale(.9);
+        color: goldenrod;
+    }
+}
+
+.arrow-img img{
+    height: 6vw;
+    animation: arrow 1s infinite;
+}
+
+.arrow-img{
+    top:4vh;
+    left: 3vw;
+}
+
+.arrow-img:hover{
+    cursor: pointer;
+}

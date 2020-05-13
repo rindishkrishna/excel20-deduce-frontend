@@ -24,6 +24,7 @@ function Answer(props) {
         if (!res.correct_answer) {
           cont.Alert("Wrong answer!");
         } else {
+          localStorage.setItem("level_number", parseInt(localStorage.getItem('level_number')) + 1);
           cont.setIsSolve(true);
           cont.Alert("Correct answer!");
           props.toggle();
