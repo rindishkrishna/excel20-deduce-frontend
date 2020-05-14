@@ -1,21 +1,26 @@
 import React, { useState, useEffect, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faLightbulb, faCompress ,faRedo, faArrowsAlt  } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAngleLeft,
+  faLightbulb,
+  faCompress,
+  faRedo,
+  faArrowsAlt,
+} from "@fortawesome/free-solid-svg-icons";
 import Doorboard from "../doorboard/Doorboard";
 import Chatarea from "../chatarea/Chatarea";
-import Arrow from '../../assets/images/arrow.png'
+import Arrow from "../../assets/images/arrow.png";
 import Photo from "../photo/Photo";
 import Answer from "../answer/Answer";
 import Imagebox from "./Imagebox/Imagebox";
 import Notice from "../notice/Notice";
 import { get } from "../../auth0/http";
 import { API_ROOT } from "../../auth0/api_config";
-import {Context} from '../../context/context';
+import { Context } from "../../context/context";
 import db from "../firebase";
 import "./Main.scss";
 
 function Main(props) {
-
   const cont = useContext(Context);
   const [level, setLevel] = useState({
     level_number: null,
@@ -43,6 +48,7 @@ function Main(props) {
       setNotice(!isNotice);
     }
   };
+
   const photo = (x, link) => {
     if (!isAnswer && !isNotice) {
       setPhoto({ image: link, state: x });
@@ -71,39 +77,35 @@ function Main(props) {
       }
     })();
 
-    console.log('say 1');
+    console.log("say 1");
 
-    window.addEventListener('resize', () => {
-      if(document.fullscreen){
-       setFull(true);
-      }else{
+    window.addEventListener("resize", () => {
+      if (document.fullscreen) {
+        setFull(true);
+      } else {
         setFull(false);
       }
     });
 
     const curr_lev_ref = db.ref().child("current_level");
     curr_lev_ref.on("value", (data) => {
-      console.log('data val',data.val());
-      let k = data.val();
+      console.log("data val", data.val());
+      let k = data.val().level;
+      console.log(props);
+      console.log(data.val().user, props.email, data.val().user != props.email);
       if (data.val()) {
-        setTimeout( () => {
-
-          let currLevel = parseInt(localStorage.getItem("level_number"));
-          console.log("cuuent levle", currLevel);
-          console.log('say 2');
-          if (currLevel !== undefined && currLevel !== null) {
-            if (k !== currLevel) {
-              localStorage.setItem("level_number", data.val());
-              cont.Alert("Someone already solved this level!");
-              window.location.reload()
-              // cont.Alert("Someone already solved this level!", 3000); //for reloading after 3s.
-              // Give some better visual feedback to user and reload page after a small delay to get new level
-            }
+        let currLevel = parseInt(localStorage.getItem("level_number"));
+        console.log("cuuent levle", currLevel);
+        console.log("say 2");
+        if (currLevel !== undefined && currLevel !== null) {
+          if (k !== currLevel && data.val().user != props.email) {
+            localStorage.setItem("level_number", data.val().level);
+            cont.Alert("Someone already solved this level!");
+            window.location.reload();
+            // cont.Alert("Someone already solved this level!", 3000); //for reloading after 3s.
+            // Give some better visual feedback to user and reload page after a small delay to get new level
           }
         }
-        ,
-            2000
-      )
       }
     });
     return () => curr_lev_ref.off("value");
@@ -111,26 +113,31 @@ function Main(props) {
 
   return (
     <div id="main">
-
-      <div className="refresh-screen cursor-pointer"
-           onClick={() => {
-             window.location.reload();
-           }}>
+      <div
+        className="refresh-screen cursor-pointer"
+        onClick={() => {
+          window.location.reload();
+        }}
+      >
         <FontAwesomeIcon icon={faRedo} />
       </div>
 
       {isFull ? (
-        <div className="full-screen cursor-pointer"
+        <div
+          className="full-screen cursor-pointer"
           onClick={() => {
-              document.exitFullscreen();
-          }}>
+            document.exitFullscreen();
+          }}
+        >
           <FontAwesomeIcon icon={faCompress} />
         </div>
       ) : (
-        <div className="full-screen cursor-pointer"
+        <div
+          className="full-screen cursor-pointer"
           onClick={() => {
-              document.documentElement.requestFullscreen();
-          }}>
+            document.documentElement.requestFullscreen();
+          }}
+        >
           <FontAwesomeIcon className="point" icon={faArrowsAlt} />
         </div>
       )}
@@ -190,7 +197,7 @@ function Main(props) {
             <img
               src={require("../../assets/images/man.png")}
               alt=""
-              id={cont.isSolve? "mascot-op" : "mascot"}
+              id={cont.isSolve ? "mascot-op" : "mascot"}
               //className={`${anime ? "mascot" : ""}`}
               //onClick={() => setAnime(true)}
               //onAnimationEnd={() => setAnime(false)}
@@ -211,18 +218,20 @@ function Main(props) {
           )}
         </div>
         <div id="door">
-          <div className={ cont.isSolve ? 'd-img-op' :"d-img"}>
-            { cont.isSolve &&
+          <div className={cont.isSolve ? "d-img-op" : "d-img"}>
+            {cont.isSolve && (
               <div className={"position-absolute arrow-img"}>
-                <img onClick={()=>window.location.reload()} src={Arrow} alt=""/>
+                <img
+                  onClick={() => window.location.reload()}
+                  src={Arrow}
+                  alt=""
+                />
               </div>
-            }
+            )}
             <div
               className="d-lock cursor-pointer"
               onClick={() => answer()}
-            >
-
-            </div>
+            ></div>
           </div>
         </div>
         <div id="photo" className="d-flex">
