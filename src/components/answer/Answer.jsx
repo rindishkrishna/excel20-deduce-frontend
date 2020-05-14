@@ -1,13 +1,12 @@
 import React, { useState, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
-import {Context} from "../../context/context";
+import { Context } from "../../context/context";
 import { post } from "../../auth0/http";
 import { API_ROOT } from "../../auth0/api_config";
 import "./Answer.scss";
 
 function Answer(props) {
-
   const cont = useContext(Context);
 
   const [text, setText] = useState("");
@@ -24,7 +23,11 @@ function Answer(props) {
         if (!res.correct_answer) {
           cont.Alert("Wrong answer!");
         } else {
-          localStorage.setItem("level_number", parseInt(localStorage.getItem('level_number')) + 1);
+          console.log(res);
+          localStorage.setItem(
+            "level_number",
+            parseInt(localStorage.getItem("level_number")) + 1
+          );
           cont.setIsSolve(true);
           cont.Alert("Correct answer!");
           props.toggle();
