@@ -66,6 +66,23 @@ function Main(props) {
     setChat(!isChat);
   };
 
+  const [profile, setProfile] = useState({});
+
+
+  useEffect(() => {
+    get(`${API_ROOT}user_info`).then((res) => {
+      console.log(res.email);
+      if (res) {
+        let p = {
+          name: res.name,
+          email: res.email
+        };
+        setProfile({...p}
+        );
+      }
+    });
+  }, []);
+
   useEffect(() => {
     //Effect callbacks are synchronous to prevent race conditions
     (async () => {
@@ -91,17 +108,16 @@ function Main(props) {
     curr_lev_ref.on("value", (data) => {
       console.log("data val", data.val());
       let k = data.val().level;
-      console.log(props);
-      console.log(data.val().user, props.email, data.val().user != props.email);
-      if (data.val()) {
+      console.log(data.val().user, profile.email, data.val().user !== profile.email);
+      if (data.val().user) {
         let currLevel = parseInt(localStorage.getItem("level_number"));
         console.log("cuuent levle", currLevel);
         console.log("say 2");
         if (currLevel !== undefined && currLevel !== null) {
-          if (k !== currLevel && data.val().user != props.email) {
+          if (k !== currLevel && data.val().user !== profile.email) {
             localStorage.setItem("level_number", data.val().level);
             cont.Alert("Someone already solved this level!");
-            window.location.reload();
+            window.location.reload()
             // cont.Alert("Someone already solved this level!", 3000); //for reloading after 3s.
             // Give some better visual feedback to user and reload page after a small delay to get new level
           }
@@ -109,7 +125,7 @@ function Main(props) {
       }
     });
     return () => curr_lev_ref.off("value");
-  }, []);
+  }, [profile]);
 
   return (
     <div id="main">
@@ -164,8 +180,8 @@ function Main(props) {
       <Chatarea
         toggle={chat}
         cha={isChat}
-        name={props.name}
-        email={props.email}
+        name={profile.name}
+        email={profile.email}
       />
       <Doorboard toggle={board} bor={isBoard} />
       {isPhoto.state && <Photo toggle={photo} link={isPhoto.image} />}

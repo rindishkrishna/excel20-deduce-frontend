@@ -93,8 +93,12 @@ function Answer(props) {
         onChange={(e) => setText(e.target.value)}
         type="text"
         className="t-box"
-      ></input>
-      <button className="sub butt" onClick={() => click()}></button>
+      >
+
+      </input>
+      <button className="sub butt" onClick={() => click()}>
+
+      </button>
       <div className="inpp">
         {list}
         <button className="enter butt" onClick={() => click()}>

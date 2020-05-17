@@ -17,19 +17,8 @@ import { get } from "./auth0/http";
 
 function App() {
   const [screen, setScreen] = useState(true);
-  const [profile, setProfile] = useState({});
-  useEffect(() => {
-    get(`${API_ROOT}user_info`).then((res) => {
-      console.log(res);
-      if (res) {
-        setProfile({
-          name: res.name,
-          email: res.email,
-        });
-      }
-    });
-    console.log(profile);
-  }, []);
+
+
   useEffect(() => {
     if (window.innerWidth < window.innerHeight) {
       setScreen(false);
@@ -48,8 +37,8 @@ function App() {
             render={() =>
               checkAuth() ? (
                 <React.Fragment>
-                  <Navbar score={30} />
-                  <Main {...profile} />
+                  <Navbar/>
+                  <Main />
                 </React.Fragment>
               ) : (
                 <Redirect to="/login" />
