@@ -14,6 +14,10 @@
         position: absolute;
         top : 2%;
         right: -10%;
+        path{
+            stroke: #dedede ;
+            stroke-width: 10px;
+        }
     }
     .t-box{
         background-color: transparent;
@@ -81,5 +85,19 @@
         .butt:focus{
             outline: none;
         }
+    }
+}
+
+
+.close {
+    color: black;
+    font-size: 7vh;
+    position: absolute;
+    top: 2%;
+    right: -10%;
+
+    path {
+        stroke: #dedede;
+        stroke-width: 2vw;
     }
 }

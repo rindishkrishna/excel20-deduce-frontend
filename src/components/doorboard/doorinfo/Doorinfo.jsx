@@ -11,7 +11,7 @@ function Doorinfo(props) {
                 <p className={`points grey-2 tex font-weight-bold ${props.bor ? "tex-tra" : ""}`}>{props.point} PTS</p>
             </div>
             <div className="img-cont">
-                {props.isOpen && <img src={require('../../../assets/images/profile.png')} className="winner-img d-block mx-auto" alt="" />}
+                {props.isOpen && <img src={props.img ? props.img : require('../../../assets/images/profile.png')} className="winner-img d-block mx-auto" alt="" />}
                 {props.isOpen && <p className="name">{props.isOpen}</p>}
             </div>
         </div>
