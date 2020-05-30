@@ -1,0 +1,44 @@
+.avatar::after {
+  clear: both;
+  content: "";
+}
+
+.avatar{
+  overflow: hidden;
+  height: 15vw;
+  position: absolute;
+  left: 50%;
+  margin-left: -7.5vw;
+  top: 50%;
+  margin-top: -10vw;
+  animation: animateAvatar;
+  animation-duration: 3s;
+  animation-timing-function: ease-out;
+  animation-delay: 1s;
+  animation-fill-mode: both;
+}
+
+@keyframes animateAvatar {
+ 0%{
+   display: none;
+   transform: translateY(70vh)
+ }
+  25%{
+    display: block;
+    transform: translate(0)
+  }
+  80%{
+    display: block;
+    transform: translate(0)
+  }
+  100%{
+    display: block;
+    transform: translateX(-25vw)
+  }
+}
+
+.avatar-cover{
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}

@@ -1,0 +1,85 @@
+.score-flex{
+  display: flex;
+  position: absolute;
+  left:80%;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  top:55%;
+  transform: translateX(-50%) translateY(-50%);
+  animation: increaseHeight;
+  animation-duration: 1s;
+  animation-delay: 4s;
+  animation-fill-mode: both;
+  animation-timing-function: ease-in;
+}
+
+.score-heading{
+  color: #f9d343;
+  position: absolute;
+  left:calc(65% + 15vw);
+  top: 10%;
+  transform: translateX(-50%);
+  font-size: 3vh;
+  font-weight: 500;
+  animation: showHeading;
+  overflow: hidden;
+  white-space: nowrap;
+  animation-fill-mode: both;
+  animation-delay: 4s;
+  animation-duration: 1s;
+}
+
+.score-cover{
+  height: 100vh;
+  width: 100vw;
+}
+
+.score-flex-box{
+  overflow: visible;
+  white-space: nowrap;
+  text-align: center;
+  //animation: increaseWidth;
+  //animation-duration: 0.5s;
+  //animation-fill-mode: both;
+  animation-delay: 3.5s;
+  height: 16vh;
+  animation-timing-function: ease-in;
+}
+
+@keyframes increaseWidth {
+  0%{
+    width: 0px;
+  }
+  100%{
+    width: 30vw;
+  }
+}
+
+@keyframes increaseHeight {
+  0%{
+    width:0;
+    overflow: hidden;
+    height: 16vh;
+  }
+  50%{
+    width:30vw;
+    overflow: hidden;
+    height: 16vh;
+  }
+  100%{
+    width:30vw;
+    overflow-y: scroll;
+    height: 70vh;
+  }
+}
+
+@keyframes showHeading {
+  0%{
+    width:0;
+    display: none;
+  }
+  100%{
+    width:30vh;
+    display: none;
+  }
+}
